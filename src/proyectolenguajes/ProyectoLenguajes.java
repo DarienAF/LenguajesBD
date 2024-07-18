@@ -16,10 +16,9 @@ public class ProyectoLenguajes {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Proyecto");
-<<<<<<< Updated upstream
-=======
+
         System.out.println("Prueba GIT DESKTOP");
->>>>>>> Stashed changes
+
     }
     
 }

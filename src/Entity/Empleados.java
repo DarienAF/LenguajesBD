@@ -11,61 +11,64 @@ package Entity;
  * @author barah
  */
 public class Empleados {
-    private int idEmpleado;
-    private String nombreEmpleado;
-    private String apellidoEmpleado;
-    private Ocupaciones idOcupacion;
-    private Ocupaciones nombreOcupacion;
-
-    public int getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-
-    public String getNombreEmpleado() {
-        return nombreEmpleado;
-    }
-
-    public void setNombreEmpleado(String nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
-    }
-
-    public String getApellidoEmpleado() {
-        return apellidoEmpleado;
-    }
-
-    public void setApellidoEmpleado(String apellidoEmpleado) {
-        this.apellidoEmpleado = apellidoEmpleado;
-    }
-
-    public Empleados(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, Ocupaciones idOcupacion, Ocupaciones nombreOcupacion) {
-        this.idEmpleado = idEmpleado;
-        this.nombreEmpleado = nombreEmpleado;
-        this.apellidoEmpleado = apellidoEmpleado;
-        this.idOcupacion = idOcupacion;
-        this.nombreOcupacion = nombreOcupacion;
-    }
-
-    public Ocupaciones getIdOcupacion() {
-        return idOcupacion;
-    }
-
-    public void setIdOcupacion(Ocupaciones idOcupacion) {
-        this.idOcupacion = idOcupacion;
-    }
-
-    public Ocupaciones getNombreOcupacion() {
-        return nombreOcupacion;
-    }
-
-    public void setNombreOcupacion(Ocupaciones nombreOcupacion) {
-        this.nombreOcupacion = nombreOcupacion;
-    }
-
-    
    
+    private int id_empleado;
+    private int id_ocupacion;
+    private String nombre_empleado;
+    private String apellido;
+    private String telefono;
+
+    public Empleados() {
+    }
+
+    public Empleados(int id_empleado, int id_ocupacion, String nombre_empleado, String apellido, String telefono) {
+        this.id_empleado = id_empleado;
+        this.id_ocupacion = id_ocupacion;
+        this.nombre_empleado = nombre_empleado;
+        this.apellido = apellido;
+        this.telefono = telefono;
+    }
+
+    public int getId_empleado() {
+        return id_empleado;
+    }
+
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
+    }
+
+    public int getId_ocupacion() {
+        return id_ocupacion;
+    }
+
+    public void setId_ocupacion(int id_ocupacion) {
+        this.id_ocupacion = id_ocupacion;
+    }
+
+    public String getNombre_empleado() {
+        return nombre_empleado;
+    }
+
+    public void setNombre_empleado(String nombre_empleado) {
+        this.nombre_empleado = nombre_empleado;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     
+    
+  
 }
