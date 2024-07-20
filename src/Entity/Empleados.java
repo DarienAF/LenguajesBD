@@ -16,12 +16,12 @@ public class Empleados {
     private int id_ocupacion;
     private String nombre_empleado;
     private String apellido;
-    private String telefono;
+    private int telefono;
 
     public Empleados() {
     }
 
-    public Empleados(int id_empleado, int id_ocupacion, String nombre_empleado, String apellido, String telefono) {
+    public Empleados(int id_empleado, int id_ocupacion, String nombre_empleado, String apellido, int telefono) {
         this.id_empleado = id_empleado;
         this.id_ocupacion = id_ocupacion;
         this.nombre_empleado = nombre_empleado;
@@ -61,11 +61,11 @@ public class Empleados {
         this.apellido = apellido;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
     

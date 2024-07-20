@@ -12,13 +12,13 @@ package Entity;
 public class Clientes {
     private int id_cliente;
     private String nombre_cliente;
-    private String telefono;
-    private String numero;
+    private int telefono;
+    private int numero;
 
     public Clientes() {
     }
 
-    public Clientes(int id_cliente, String nombre_cliente, String telefono, String numero) {
+    public Clientes(int id_cliente, String nombre_cliente, int telefono, int numero) {
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.telefono = telefono;
@@ -41,19 +41,19 @@ public class Clientes {
         this.nombre_cliente = nombre_cliente;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 

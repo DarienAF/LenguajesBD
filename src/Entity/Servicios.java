@@ -7,7 +7,7 @@ package Entity;
 
 public class Servicios {
     private int idServicio;
-    private String nombreServicio;
+    private int monto;
 
     public int getIdServicio() {
         return idServicio;
@@ -17,18 +17,20 @@ public class Servicios {
         this.idServicio = idServicio;
     }
 
-    public String getNombreServicio() {
-        return nombreServicio;
+    public int getMonto() {
+        return monto;
     }
 
-    public void setNombreServicio(String nombreServicio) {
-        this.nombreServicio = nombreServicio;
+    public void setMonto(int monto) {
+        this.monto = monto;
     }
 
-    public Servicios(int idServicio, String nombreServicio) {
+    public Servicios(int idServicio, int monto) {
         this.idServicio = idServicio;
-        this.nombreServicio = nombreServicio;
+        this.monto = monto;
     }
+
+    
     
     
 }

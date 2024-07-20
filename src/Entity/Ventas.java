@@ -7,6 +7,7 @@ package Entity;
 
 public class Ventas {
     private int idVenta;
+    private int idProducto;
     private int MontoVenta;
 
     public int getIdVenta() {
@@ -25,10 +26,21 @@ public class Ventas {
         this.MontoVenta = MontoVenta;
     }
 
-    public Ventas(int idVenta, int MontoVenta) {
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public Ventas(int idVenta, int idProducto, int MontoVenta) {
         this.idVenta = idVenta;
+        this.idProducto = idProducto;
         this.MontoVenta = MontoVenta;
     }
+
+    
     
     
     
