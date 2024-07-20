@@ -12,6 +12,9 @@ package Entity;
 public class Proveedor {
     private int idProveedor;
     private String nombreProveedor;
+    private String correo;
+    private String contacto;
+    private String direccion;
 
     public int getIdProveedor() {
         return idProveedor;
@@ -32,6 +35,38 @@ public class Proveedor {
     public Proveedor(int idProveedor, String nombreProveedor) {
         this.idProveedor = idProveedor;
         this.nombreProveedor = nombreProveedor;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Proveedor(int idProveedor, String nombreProveedor, String correo, String contacto, String direccion) {
+        this.idProveedor = idProveedor;
+        this.nombreProveedor = nombreProveedor;
+        this.correo = correo;
+        this.contacto = contacto;
+        this.direccion = direccion;
     }
     
     

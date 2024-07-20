@@ -10,29 +10,54 @@ package Entity;
  * @author darie
  */
 public class Clientes {
-    private int idCliente;
-    private int nombreCliente;
+    private int id_cliente;
+    private String nombre_cliente;
+    private int telefono;
+    private int numero;
 
-    public int getIdCliente() {
-        return idCliente;
+    public Clientes() {
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public Clientes(int id_cliente, String nombre_cliente, int telefono, int numero) {
+        this.id_cliente = id_cliente;
+        this.nombre_cliente = nombre_cliente;
+        this.telefono = telefono;
+        this.numero = numero;
     }
 
-    public int getNombreCliente() {
-        return nombreCliente;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
-    public void setNombreCliente(int nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
-    public Clientes(int idCliente, int nombreCliente) {
-        this.idCliente = idCliente;
-        this.nombreCliente = nombreCliente;
+    public String getNombre_cliente() {
+        return nombre_cliente;
     }
+
+    public void setNombre_cliente(String nombre_cliente) {
+        this.nombre_cliente = nombre_cliente;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+   
 
    
     

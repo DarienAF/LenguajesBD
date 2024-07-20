@@ -4,64 +4,56 @@
  */
 package Entity;
 
+import java.time.LocalDate;
 
 public class Reservaciones {
     
-    private int idReservaciones;
-    private int cantidadPersonas;
-    private String diaReservacion;
-    private Clientes idCliente;
-    private Clientes nombreCliente;
+   private int id_reservaciones;
+   private int id_cliente;
+   private int cantidad;
+   private LocalDate dia;
 
-    public int getIdReservaciones() {
-        return idReservaciones;
+    public Reservaciones() {
     }
 
-    public void setIdReservaciones(int idReservaciones) {
-        this.idReservaciones = idReservaciones;
+    public Reservaciones(int id_reservaciones, int id_cliente, int cantidad, LocalDate dia) {
+        this.id_reservaciones = id_reservaciones;
+        this.id_cliente = id_cliente;
+        this.cantidad = cantidad;
+        this.dia = dia;
     }
 
-    public int getCantidadPersonas() {
-        return cantidadPersonas;
+    public int getId_reservaciones() {
+        return id_reservaciones;
     }
 
-    public void setCantidadPersonas(int cantidadPersonas) {
-        this.cantidadPersonas = cantidadPersonas;
+    public void setId_reservaciones(int id_reservaciones) {
+        this.id_reservaciones = id_reservaciones;
     }
 
-    public String getDiaReservacion() {
-        return diaReservacion;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
-    public void setDiaReservacion(String diaReservacion) {
-        this.diaReservacion = diaReservacion;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
-    public Clientes getIdCliente() {
-        return idCliente;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setIdCliente(Clientes idCliente) {
-        this.idCliente = idCliente;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public Clientes getNombreCliente() {
-        return nombreCliente;
+    public LocalDate getDia() {
+        return dia;
     }
 
-    public void setNombreCliente(Clientes nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
     }
-
-    public Reservaciones(int idReservaciones, int cantidadPersonas, String diaReservacion, Clientes idCliente, Clientes nombreCliente) {
-        this.idReservaciones = idReservaciones;
-        this.cantidadPersonas = cantidadPersonas;
-        this.diaReservacion = diaReservacion;
-        this.idCliente = idCliente;
-        this.nombreCliente = nombreCliente;
-    }
-
    
-    
-    
+   
 }

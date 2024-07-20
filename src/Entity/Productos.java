@@ -15,10 +15,10 @@ public class Productos {
     private int idProducto;
     private String nombreProducto;
     private int cantidadInventario;
-    private Categorias idCategoria;
-    private Categorias nombreCategoria;
-    private Proveedor idProveedor;
-    private Proveedor nombreProveedor;
+    private int idCategoria;
+    private int idProveedor;
+    private int inventario;
+    
 
     public int getIdProducto() {
         return idProducto;
@@ -44,47 +44,43 @@ public class Productos {
         this.cantidadInventario = cantidadInventario;
     }
 
-    public Categorias getIdCategoria() {
+    public int getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(Categorias idCategoria) {
+    public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 
-    public Categorias getNombreCategoria() {
-        return nombreCategoria;
-    }
 
-    public void setNombreCategoria(Categorias nombreCategoria) {
-        this.nombreCategoria = nombreCategoria;
-    }
-
-    public Proveedor getIdProveedor() {
+    public int getIdProveedor() {
         return idProveedor;
     }
 
-    public void setIdProveedor(Proveedor idProveedor) {
+    public void setIdProveedor(int idProveedor) {
         this.idProveedor = idProveedor;
     }
 
-    public Proveedor getNombreProveedor() {
-        return nombreProveedor;
+    public int getInventario() {
+        return inventario;
     }
 
-    public void setNombreProveedor(Proveedor nombreProveedor) {
-        this.nombreProveedor = nombreProveedor;
+    public void setInventario(int inventario) {
+        this.inventario = inventario;
     }
 
-    public Productos(int idProducto, String nombreProducto, int cantidadInventario, Categorias idCategoria, Categorias nombreCategoria, Proveedor idProveedor, Proveedor nombreProveedor) {
+    public Productos(int idProducto, String nombreProducto, int cantidadInventario, int idCategoria, int idProveedor, int inventario) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.cantidadInventario = cantidadInventario;
         this.idCategoria = idCategoria;
-        this.nombreCategoria = nombreCategoria;
         this.idProveedor = idProveedor;
-        this.nombreProveedor = nombreProveedor;
+        this.inventario = inventario;
     }
+
+
+
+    
     
     
     
