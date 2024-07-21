@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Entity;
 
 
 public class Servicios {
     private int idServicio;
+    private String servicio;
     private int monto;
+
+    public Servicios() {
+    }
+
+    public Servicios(int idServicio, String servicio, int monto) {
+        this.idServicio = idServicio;
+        this.servicio = servicio;
+        this.monto = monto;
+    }
 
     public int getIdServicio() {
         return idServicio;
@@ -15,6 +22,14 @@ public class Servicios {
 
     public void setIdServicio(int idServicio) {
         this.idServicio = idServicio;
+    }
+
+    public String getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
     }
 
     public int getMonto() {
@@ -25,12 +40,6 @@ public class Servicios {
         this.monto = monto;
     }
 
-    public Servicios(int idServicio, int monto) {
-        this.idServicio = idServicio;
-        this.monto = monto;
-    }
-
-    
     
     
 }

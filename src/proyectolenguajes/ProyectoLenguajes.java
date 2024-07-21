@@ -1,24 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package proyectolenguajes;
 
-/**
- *
- * @author darie
- */
+import View.inicioView;
+
 public class ProyectoLenguajes {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Proyecto");
-
-        System.out.println("Prueba GIT DESKTOP");
-
+        Ejecutar(); //Se empieza con la funcion/metodo para que surja la interfaz
+        
+    }
+    
+    public static void Ejecutar(){
+    inicioView ejecutar = new inicioView();
+    ejecutar.setLocationRelativeTo(null); 
+    ejecutar.setVisible(true);
     }
     
 }
