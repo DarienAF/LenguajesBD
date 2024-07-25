@@ -26,7 +26,7 @@ public class ServiciosDAO {
     public String crearServicio(Connection conn, Servicios servicio) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_SERVICIO(?, ?)}";
+        String procedureCall = "{call ADD_SERVICIO(?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);

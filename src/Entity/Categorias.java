@@ -26,5 +26,8 @@ public class Categorias {
         this.IdCategoria = IdCategoria;
         this.nombreCategoria = nombreCategoria;
     }
+
+    public Categorias() {
+    }
     
 }

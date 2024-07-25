@@ -68,10 +68,7 @@ public class Productos {
         this.inventario = inventario;
     }
 
+    public Productos() {
+    }
 
-
-    
-    
-    
-    
 }
