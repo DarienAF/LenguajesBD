@@ -1,24 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-package proyectolenguajes;
 
-/**
- *
- * @author darie
- */
+package proyectolenguajes;
+//Import del archivo .java JFrame de Pantalla de Inicio
+import View.inicioView;
+
 public class ProyectoLenguajes {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Proyecto");
-
-        System.out.println("Prueba GIT DESKTOP");
-
+        Ejecutar(); //Se empieza con la funcion/metodo para que surja la interfaz
+        
+    }
+    //Metodo para ejecutar el JFrame desde la Main
+    public static void Ejecutar(){
+        //Se intancia el JFrame
+    inicioView ejecutar = new inicioView();
+    ejecutar.setLocationRelativeTo(null);  //Centrar
+    ejecutar.setVisible(true); //Mostrar JFrame
     }
     
 }

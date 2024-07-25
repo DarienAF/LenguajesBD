@@ -1,32 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Entity;
 
-
-
-/**
- *
- * @author barah
- */
 public class Empleados {
    
     private int id_empleado;
     private int id_ocupacion;
     private String nombre_empleado;
     private String apellido;
-    private int telefono;
+    private String telefono;
+    private int salario;
 
     public Empleados() {
     }
 
-    public Empleados(int id_empleado, int id_ocupacion, String nombre_empleado, String apellido, int telefono) {
+    public Empleados(int id_empleado, int id_ocupacion, String nombre_empleado,
+            String apellido, String telefono, int salario) {
         this.id_empleado = id_empleado;
         this.id_ocupacion = id_ocupacion;
         this.nombre_empleado = nombre_empleado;
         this.apellido = apellido;
         this.telefono = telefono;
+        this.salario = salario;
     }
 
     public int getId_empleado() {
@@ -61,14 +55,20 @@ public class Empleados {
         this.apellido = apellido;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     
+    public void setSalario(int salario){
+        this.salario = salario;
+    }
     
+    public int getSalario(){
+        return salario;
+    }
   
 }

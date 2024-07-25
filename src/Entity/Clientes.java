@@ -1,24 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package Entity;
 
-
-/**
- *
- * @author darie
- */
 public class Clientes {
     private int id_cliente;
     private String nombre_cliente;
-    private int telefono;
-    private int numero;
+    private String telefono;
+    private String numero;
 
     public Clientes() {
     }
 
-    public Clientes(int id_cliente, String nombre_cliente, int telefono, int numero) {
+    public Clientes(int id_cliente, String nombre_cliente, String telefono, String numero) {
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.telefono = telefono;
@@ -41,25 +33,19 @@ public class Clientes {
         this.nombre_cliente = nombre_cliente;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
-    }
-
-   
-
-   
-    
-    
+    }   
 }

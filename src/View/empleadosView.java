@@ -72,7 +72,7 @@ public class empleadosView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void regresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresoMouseClicked
-        new PantallaInicio().setVisible(true);
+        new inicioView().setVisible(true);
     }//GEN-LAST:event_regresoMouseClicked
 
     /**
