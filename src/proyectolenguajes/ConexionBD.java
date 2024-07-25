@@ -3,7 +3,9 @@ package proyectolenguajes;
 //Importes para la conexion:
 import javax.swing.JOptionPane;
 import java.sql.Connection;
+//Manejador de Conexion
 import java.sql.DriverManager;
+//Manejo de Excepciones
 import java.sql.SQLException;
 
 public class ConexionBD {

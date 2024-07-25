@@ -24,7 +24,9 @@ public class CategoriasDAO {
     
     /* --------- METODO PARA CREAR CATEGORIA ---------- */
     public String crearCategoria(Connection conn, Categorias categorias) {
-        CallableStatement cst = null;
+        //CallableStatement es una interfaz Java para sentencia SQL 
+        //cst actuara de variable para almacenar una referencia a un objeto de Interfaz Call
+        CallableStatement cst = null; //Como no deberia tener nada al inicio es Null
 
         // se define la llamada al procedimiento almacenado
         String procedureCall = "{call ADD_CATEGORY(?, ?)}";
@@ -119,24 +121,28 @@ public class CategoriasDAO {
     String procedureCall = "{call UPDATE_CATEGORY(?, ?)}";
 
     try {
+        //Se verifica si la conexion es nula
         if (conn == null) {
             respuesta = "Error: La conexion a la base de datos es nula";
             return respuesta;
         }
-
+        //Se prepare el CallableStatment
         cst = conn.prepareCall(procedureCall);
 
+        //Se configura los prametos del Procedimiento Almacenado
         cst.setInt(1, categorias.getIdCategoria());
         cst.setString(2, categorias.getNombreCategoria());
 
         // Mensaje de éxito
         respuesta = "Categoria modificada correctamente";
-
+        
+        //Se ejecuta el Procedimiento 
         cst.execute();
     } catch (SQLException err) {
+        //Resouesta ante error
         respuesta = "La categoria no se ha modificado por \nError: " + err.getMessage();
     } finally {
-        // Cierre del CallableStatement en el bloque finally
+        // Cierre del CallableStatement en el bloque finally (Libera Recursos)
         if (cst != null) {
             try {
                 cst.close();
@@ -145,12 +151,14 @@ public class CategoriasDAO {
             }
         }
     }
+    //Mensaje de retorno del metodo
     return respuesta;
 }
 
 
     /* --------- METODO PARA ELIMINAR CATEGORIA ---------- */
    public String eliminarCategoria(Connection conn, int id) {
+    
     CallableStatement cst = null;
 
     String procedureCall = "{call DELETE_CATEGORY(?)}";
