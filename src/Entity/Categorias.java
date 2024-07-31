@@ -30,4 +30,8 @@ public class Categorias {
     public Categorias() {
     }
     
+    /*@Override
+    public String toString() {
+    return "Categorias{idCategoria=" + idCategoria + ", nombreCategoria='" + nombreCategoria + "'}";
+}*/
 }

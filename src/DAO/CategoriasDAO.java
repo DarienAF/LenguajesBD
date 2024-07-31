@@ -29,21 +29,20 @@ public class CategoriasDAO {
         CallableStatement cst = null; //Como no deberia tener nada al inicio es Null
 
         // se define la llamada al procedimiento almacenado
-        String procedureCall = "{call ADD_CATEGORY(?, ?)}";
+        String procedureCall = "{call sp_insert_categoria(?)}"; // Asegúrate de que el nombre sea correcto
 
         try {
             // se prepara el CallableStatement con la llamada al procedimiento
             cst = conn.prepareCall(procedureCall);
 
-            // se configura parámetros del procedimiento almacenado
-            cst.setInt(1, categorias.getIdCategoria());     
-            cst.setString(2, categorias.getNombreCategoria());      
-
-            // Mensaje de éxito
-            respuesta = "Categoria almacena sin problemas";
+            // se configura parámetros del procedimiento almacenado   
+            cst.setString(1, categorias.getNombreCategoria());      
 
             // Ejecutamos el procedimiento almacenado
             cst.execute();
+            
+            // Mensaje de éxito
+            respuesta = "Categoria almacena sin problemas";
 
             // Cerramos el CallableStatement
             cst.close();
@@ -118,7 +117,7 @@ public class CategoriasDAO {
     public String modificarCategoria(Connection conn, Categorias categorias) {
     CallableStatement cst = null;
 
-    String procedureCall = "{call UPDATE_CATEGORY(?, ?)}";
+    String procedureCall = "{call sp_update_categoria(?, ?)}";
 
     try {
         //Se verifica si la conexion es nula
@@ -132,12 +131,13 @@ public class CategoriasDAO {
         //Se configura los prametos del Procedimiento Almacenado
         cst.setInt(1, categorias.getIdCategoria());
         cst.setString(2, categorias.getNombreCategoria());
-
-        // Mensaje de éxito
-        respuesta = "Categoria modificada correctamente";
         
         //Se ejecuta el Procedimiento 
         cst.execute();
+        
+        // Mensaje de éxito
+        respuesta = "Categoria modificada correctamente";
+        
     } catch (SQLException err) {
         //Resouesta ante error
         respuesta = "La categoria no se ha modificado por \nError: " + err.getMessage();
@@ -161,7 +161,7 @@ public class CategoriasDAO {
     
     CallableStatement cst = null;
 
-    String procedureCall = "{call DELETE_CATEGORY(?)}";
+    String procedureCall = "{call sp_delete_categoria(?)}";
 
     try {
         if (conn == null) {
