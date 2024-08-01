@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class ConexionBD {
     private final String driver = "oracle.jdbc.driver.OracleDriver";
-    private final String url = "jdbc:oracle:thin:@";
+    private final String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
     private final String user = "proyectoadmin";
     private final String pass = "123";
 
@@ -16,7 +16,7 @@ public class ConexionBD {
     public Connection conectar() throws SQLException {
         try { 
             //Primero se necesita cargar el driver
-            Class.forName(driver);
+            Class.forName("oracle.jdbc.driver.OracleDriver");
             
             //Segundo, establecer la conexion con DriverManager
             return DriverManager.getConnection(url, user, pass);

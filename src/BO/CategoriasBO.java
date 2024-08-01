@@ -9,8 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JTable;
 
 public class CategoriasBO {
-    
-    public class CategoriaBO {
+  
     
     ConexionBD conexion = new ConexionBD();
             
@@ -91,5 +90,5 @@ public class CategoriasBO {
     
     
  
-    }
+   
 }

@@ -26,29 +26,34 @@ public class CategoriasDAO {
     public String crearCategoria(Connection conn, Categorias categorias) {
         CallableStatement cst = null;
 
-        // se define la llamada al procedimiento almacenado
-        String procedureCall = "{call ADD_CATEGORY(?, ?)}";
+        // Se define la llamada al procedimiento almacenado
+        String procedureCall = "{call ADD_CATEGORY(?,?,?,?)}";
 
         try {
-            // se prepara el CallableStatement con la llamada al procedimiento
+            // Se prepara el CallableStatement con la llamada al procedimiento
             cst = conn.prepareCall(procedureCall);
 
-            // se configura parámetros del procedimiento almacenado
+            // Se configuran los parámetros del procedimiento almacenado
             cst.setInt(1, categorias.getIdCategoria());     
-            cst.setString(2, categorias.getNombreCategoria());      
-
-            // Mensaje de éxito
-            respuesta = "Categoria almacena sin problemas";
+            cst.setString(2, categorias.getNombreCategoria()); 
+            cst.registerOutParameter(3, Types.NUMERIC);
+            cst.registerOutParameter(4, Types.VARCHAR);
 
             // Ejecutamos el procedimiento almacenado
             cst.execute();
 
-            // Cerramos el CallableStatement
-            cst.close();
+            // Recuperamos los valores de los parámetros de salida
+            int outputNum = cst.getInt(3);
+            String outputMsg = cst.getString(4);
+
+            // Mensaje de éxito
+            respuesta = "Categoría almacenada sin problemas. OutputNum: " + outputNum + ", OutputMsg: " + outputMsg;
+            JOptionPane.showMessageDialog(null, respuesta);
 
         } catch (SQLException err) {
             // En caso de error, capturamos la excepción y configuramos el mensaje de error
-            respuesta = "La categoria no resultado en \n Error:" + err.getMessage();
+            respuesta = "La categoría no se almacenó. Error: " + err.getMessage();
+            JOptionPane.showMessageDialog(null, respuesta);
 
         } finally {
             // En el bloque finally nos aseguramos de cerrar el CallableStatement
@@ -56,8 +61,9 @@ public class CategoriasDAO {
                 try {
                     cst.close();
                 } catch (SQLException e) {
-                    // Manejo de excepciones al cerrar 
-                    respuesta = respuesta + " " + e.getMessage();
+                    // Manejo de excepciones al cerrar
+                    respuesta = "Error al cerrar CallableStatement: " + e.getMessage();
+                    JOptionPane.showMessageDialog(null, respuesta);
                 }
             }
         }

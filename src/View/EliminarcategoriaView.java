@@ -8,12 +8,12 @@ package View;
  *
  * @author barah
  */
-public class categoriaView extends javax.swing.JFrame {
+public class EliminarcategoriaView extends javax.swing.JFrame {
 
     /**
      * Creates new form categoriaView
      */
-    public categoriaView() {
+    public EliminarcategoriaView() {
         initComponents();
     }
 
@@ -31,12 +31,17 @@ public class categoriaView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(67, 67, 2));
 
         regreso.setText("Regresar");
         regreso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 regresoMouseClicked(evt);
+            }
+        });
+        regreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresoActionPerformed(evt);
             }
         });
 
@@ -72,8 +77,13 @@ public class categoriaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void regresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresoMouseClicked
-        new inicioView().setVisible(true);
+
+        dispose();
     }//GEN-LAST:event_regresoMouseClicked
+
+    private void regresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regresoActionPerformed
     
     /**
      * @param args the command line arguments
@@ -92,20 +102,27 @@ public class categoriaView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(categoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarcategoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(categoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarcategoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(categoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarcategoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(categoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarcategoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new categoriaView().setVisible(true);
+                new EliminarcategoriaView().setVisible(true);
             }
         });
     }
