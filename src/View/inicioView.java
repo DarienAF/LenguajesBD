@@ -9,10 +9,12 @@ package View;
  * @author darie
  */
 public class inicioView extends javax.swing.JFrame {
+    
+    public void listarCategorias(){
+        
+    }
 
-    /**
-     * Creates new form inicioView
-     */
+   
     public inicioView() {
         initComponents();
     }
@@ -26,21 +28,196 @@ public class inicioView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        Titulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        cerrar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        CategoriasMenu = new javax.swing.JMenu();
+        CrearCategoria = new javax.swing.JMenuItem();
+        ModificarCategoria = new javax.swing.JMenuItem();
+        EliminarCategoria = new javax.swing.JMenuItem();
+        ClientesMenu = new javax.swing.JMenu();
+        EmpleadosMenu = new javax.swing.JMenu();
+        OcupacionesMenu = new javax.swing.JMenu();
+        ProductosMenu = new javax.swing.JMenu();
+        ProveedoresMenu = new javax.swing.JMenu();
+        ReservacionesMenu = new javax.swing.JMenu();
+        ServiciosMenu = new javax.swing.JMenu();
+        VentasMenu = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(67, 67, 2));
+
+        Titulo.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
+        Titulo.setForeground(new java.awt.Color(153, 104, 34));
+        Titulo.setText("UNDER FIRE");
+
+        jLabel1.setFont(new java.awt.Font("Goudy Stout", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 104, 34));
+        jLabel1.setText("Paintball");
+
+        cerrar.setBackground(new java.awt.Color(153, 104, 34));
+        cerrar.setText("Cerrar");
+        cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(282, 282, 282)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(103, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(Titulo)
+                        .addGap(91, 91, 91))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(Titulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
+                .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+
+        jMenuBar1.setBackground(new java.awt.Color(153, 104, 34));
+
+        CategoriasMenu.setText("Categorias");
+        CategoriasMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CategoriasMenuMouseClicked(evt);
+            }
+        });
+
+        CrearCategoria.setText("Crear una nueva");
+        CrearCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearCategoriaMouseClicked(evt);
+            }
+        });
+        CrearCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearCategoriaActionPerformed(evt);
+            }
+        });
+        CategoriasMenu.add(CrearCategoria);
+
+        ModificarCategoria.setText("Modificar una existente");
+        ModificarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarCategoriaMouseClicked(evt);
+            }
+        });
+        ModificarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarCategoriaActionPerformed(evt);
+            }
+        });
+        CategoriasMenu.add(ModificarCategoria);
+
+        EliminarCategoria.setText("Eliminar una existente");
+        EliminarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCategoriaActionPerformed(evt);
+            }
+        });
+        CategoriasMenu.add(EliminarCategoria);
+
+        jMenuBar1.add(CategoriasMenu);
+
+        ClientesMenu.setText("Clientes");
+        jMenuBar1.add(ClientesMenu);
+
+        EmpleadosMenu.setText("Empleados");
+        jMenuBar1.add(EmpleadosMenu);
+
+        OcupacionesMenu.setText("Ocupaciones");
+        jMenuBar1.add(OcupacionesMenu);
+
+        ProductosMenu.setText("Productos");
+        jMenuBar1.add(ProductosMenu);
+
+        ProveedoresMenu.setText("Proveedores");
+        jMenuBar1.add(ProveedoresMenu);
+
+        ReservacionesMenu.setText("Reservaciones");
+        jMenuBar1.add(ReservacionesMenu);
+
+        ServiciosMenu.setText("Servicios");
+        jMenuBar1.add(ServiciosMenu);
+
+        VentasMenu.setText("Ventas");
+        jMenuBar1.add(VentasMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CategoriasMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoriasMenuMouseClicked
+       
+    }//GEN-LAST:event_CategoriasMenuMouseClicked
+
+    private void ModificarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCategoriaActionPerformed
+        ModificarcategoriaView modificar = new ModificarcategoriaView();
+        modificar.setVisible(true);
+    }//GEN-LAST:event_ModificarCategoriaActionPerformed
+
+    private void CrearCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCategoriaActionPerformed
+        CrearcategoriaView crear = new CrearcategoriaView();
+        crear.setVisible(true);
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_CrearCategoriaActionPerformed
+
+    private void CrearCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearCategoriaMouseClicked
+        CrearcategoriaView crear = new CrearcategoriaView();
+        crear.setVisible(true);
+        setLocationRelativeTo(null);
+        
+    }//GEN-LAST:event_CrearCategoriaMouseClicked
+
+    private void cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseClicked
+        dispose();
+    }//GEN-LAST:event_cerrarMouseClicked
+
+    private void EliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCategoriaActionPerformed
+        EliminarcategoriaView eliminar = new EliminarcategoriaView();
+        eliminar.setVisible(true);
+    }//GEN-LAST:event_EliminarCategoriaActionPerformed
+
+    private void ModificarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarCategoriaMouseClicked
+        ModificarcategoriaView modificar = new ModificarcategoriaView();
+        modificar.setVisible(true);
+    }//GEN-LAST:event_ModificarCategoriaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +255,22 @@ public class inicioView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu CategoriasMenu;
+    private javax.swing.JMenu ClientesMenu;
+    private javax.swing.JMenuItem CrearCategoria;
+    private javax.swing.JMenuItem EliminarCategoria;
+    private javax.swing.JMenu EmpleadosMenu;
+    private javax.swing.JMenuItem ModificarCategoria;
+    private javax.swing.JMenu OcupacionesMenu;
+    private javax.swing.JMenu ProductosMenu;
+    private javax.swing.JMenu ProveedoresMenu;
+    private javax.swing.JMenu ReservacionesMenu;
+    private javax.swing.JMenu ServiciosMenu;
+    private javax.swing.JLabel Titulo;
+    private javax.swing.JMenu VentasMenu;
+    private javax.swing.JButton cerrar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
