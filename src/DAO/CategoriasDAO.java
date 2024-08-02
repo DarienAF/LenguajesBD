@@ -29,27 +29,25 @@ public class CategoriasDAO {
         CallableStatement cst = null; //Como no deberia tener nada al inicio es Null
 
         // se define la llamada al procedimiento almacenado
-        String procedureCall = "{call sp_insert_categoria(?)}"; // Asegúrate de que el nombre sea correcto
+        String procedureCall = "{call sp_insert_categoria(?)}"; 
 
         try {
-            // se prepara el CallableStatement con la llamada al procedimiento
             cst = conn.prepareCall(procedureCall);
 
             // se configura parámetros del procedimiento almacenado   
             cst.setString(1, categorias.getNombreCategoria());      
 
             // Ejecutamos el procedimiento almacenado
+
             cst.execute();
             
             // Mensaje de éxito
             respuesta = "Categoria almacena sin problemas";
 
-            // Cerramos el CallableStatement
-            cst.close();
-
         } catch (SQLException err) {
-            // En caso de error, capturamos la excepción y configuramos el mensaje de error
-            respuesta = "La categoria no resultado en \n Error:" + err.getMessage();
+           
+            respuesta = "La categoría no se almacenó. Error: " + err.getMessage();
+            JOptionPane.showMessageDialog(null, respuesta);
 
         } finally {
             // En el bloque finally nos aseguramos de cerrar el CallableStatement
@@ -57,8 +55,9 @@ public class CategoriasDAO {
                 try {
                     cst.close();
                 } catch (SQLException e) {
-                    // Manejo de excepciones al cerrar 
-                    respuesta = respuesta + " " + e.getMessage();
+                    // Manejo de excepciones al cerrar
+                    respuesta = "Error al cerrar CallableStatement: " + e.getMessage();
+                    JOptionPane.showMessageDialog(null, respuesta);
                 }
             }
         }
@@ -77,7 +76,7 @@ public class CategoriasDAO {
 
     try {
         // Preparacion y ejecucion del CallableStatement para el procedimiento
-        cst = conn.prepareCall("{call P_READ_CATEGORIA(?)}");
+        cst = conn.prepareCall("{call sp_listar_categorias(?)}");
         cst.registerOutParameter(1, Types.REF_CURSOR);  
         // Registro del parametro de salida de cursor
         cst.execute();
@@ -87,8 +86,8 @@ public class CategoriasDAO {
 
         // Repetir sobre los resultados y agregarlos al modelo de la tabla
         while (rs.next()) {
-            int id = rs.getInt("ID"); //int x String
-            String categoria = rs.getString("CATEGORIA");
+            int id = rs.getInt("id_categoria"); //int x String
+            String categoria = rs.getString("nombre_categoria");
 
             //Agregar filas
             model.addRow(new Object[]{id, categoria}); 
@@ -119,8 +118,6 @@ public class CategoriasDAO {
 
     String procedureCall = "{call sp_update_categoria(?, ?)}";
 
-    try {
-        //Se verifica si la conexion es nula
         if (conn == null) {
             respuesta = "Error: La conexion a la base de datos es nula";
             return respuesta;
@@ -128,10 +125,11 @@ public class CategoriasDAO {
         //Se prepare el CallableStatment
         cst = conn.prepareCall(procedureCall);
 
-        //Se configura los prametos del Procedimiento Almacenado
         cst.setInt(1, categorias.getIdCategoria());
         cst.setString(2, categorias.getNombreCategoria());
-        
+
+        // Mensaje de exito
+        respuesta = "Categoria modificada correctamente";
         //Se ejecuta el Procedimiento 
         cst.execute();
         
