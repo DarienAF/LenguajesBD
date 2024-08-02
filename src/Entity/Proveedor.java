@@ -60,6 +60,8 @@ public class Proveedor {
         this.contacto = contacto;
         this.direccion = direccion;
     }
-    
+
+    public Proveedor() {
+    }
     
 }

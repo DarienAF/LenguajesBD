@@ -24,7 +24,9 @@ public class CategoriasDAO {
     
     /* --------- METODO PARA CREAR CATEGORIA ---------- */
     public String crearCategoria(Connection conn, Categorias categorias) {
-        CallableStatement cst = null;
+        //CallableStatement es una interfaz Java para sentencia SQL 
+        //cst actuara de variable para almacenar una referencia a un objeto de Interfaz Call
+        CallableStatement cst = null; //Como no deberia tener nada al inicio es Null
 
         // Se define la llamada al procedimiento almacenado
         String procedureCall = "{call sp_insert_categoria(?)}";
@@ -110,24 +112,26 @@ public class CategoriasDAO {
 
     String procedureCall = "{call sp_update_categoria(?, ?)}";
 
-     try {
         if (conn == null) {
             respuesta = "Error: La conexion a la base de datos es nula";
             return respuesta;
         }
-
+        //Se prepare el CallableStatment
         cst = conn.prepareCall(procedureCall);
+
         cst.setInt(1, categorias.getIdCategoria());
         cst.setString(2, categorias.getNombreCategoria());
 
         // Mensaje de exito
         respuesta = "Categoria modificada correctamente";
-
+        
+        //Se ejecuta el Procedimiento 
         cst.execute();
     } catch (SQLException err) {
+        //Resouesta ante error
         respuesta = "La categoria no se ha modificado por \nError: " + err.getMessage();
     } finally {
-        // Cierre del CallableStatement en el bloque finally
+        // Cierre del CallableStatement en el bloque finally (Libera Recursos)
         if (cst != null) {
             try {
                 cst.close();
@@ -136,12 +140,14 @@ public class CategoriasDAO {
             }
         }
     }
+    //Mensaje de retorno del metodo
     return respuesta;
 }
 
 
     /* --------- METODO PARA ELIMINAR CATEGORIA ---------- */
    public String eliminarCategoria(Connection conn, int id) {
+    
     CallableStatement cst = null;
 
     String procedureCall = "{call sp_delete_categoria(?)}";

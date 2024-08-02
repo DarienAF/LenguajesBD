@@ -1,14 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Entity;
 
+import java.time.LocalDate;
 
 public class Ventas {
     private int idVenta;
     private int idProducto;
-    private int MontoVenta;
+    private int idCliente;
+    private int idServicio;
+    private int Cantidad;
+    private int Total;
+    private LocalDate Fecha;
+
+    public Ventas() {
+    }
+
+    public Ventas(int idVenta, int idProducto, int idCliente, int idServicio, int Cantidad, int Total, LocalDate Fecha) {
+        this.idVenta = idVenta;
+        this.idProducto = idProducto;
+        this.idCliente = idCliente;
+        this.idServicio = idServicio;
+        this.Cantidad = Cantidad;
+        this.Total = Total;
+        this.Fecha = Fecha;
+    }
 
     public int getIdVenta() {
         return idVenta;
@@ -16,14 +31,6 @@ public class Ventas {
 
     public void setIdVenta(int idVenta) {
         this.idVenta = idVenta;
-    }
-
-    public int getMontoVenta() {
-        return MontoVenta;
-    }
-
-    public void setMontoVenta(int MontoVenta) {
-        this.MontoVenta = MontoVenta;
     }
 
     public int getIdProducto() {
@@ -34,14 +41,45 @@ public class Ventas {
         this.idProducto = idProducto;
     }
 
-    public Ventas(int idVenta, int idProducto, int MontoVenta) {
-        this.idVenta = idVenta;
-        this.idProducto = idProducto;
-        this.MontoVenta = MontoVenta;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    
-    
-    
-    
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public int getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
+    }
+
+    public int getCantidad() {
+        return Cantidad;
+    }
+
+    public void setCantidad(int Cantidad) {
+        this.Cantidad = Cantidad;
+    }
+
+    public int getTotal() {
+        return Total;
+    }
+
+    public void setTotal(int Total) {
+        this.Total = Total;
+    }
+
+    public LocalDate getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(LocalDate Fecha) {
+        this.Fecha = Fecha;
+    }
+
+
 }

@@ -26,7 +26,7 @@ public class EmpleadosDAO {
     public String crearEmpleado(Connection conn, Empleados empleados) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_EMPLEADO(?, ?, ?, ?, ?)}";
+        String procedureCall = "{call ADD_EMPLEADO(?, ?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -36,7 +36,8 @@ public class EmpleadosDAO {
             cst.setString(3, empleados.getNombre_empleado());
             cst.setString(4, empleados.getApellido());
             cst.setString(5, empleados.getTelefono());
-
+            cst.setInt(6, empleados.getSalario());
+            
             respuesta = "Empleado creado correctamente";
             cst.execute();
             cst.close();
@@ -58,7 +59,7 @@ public class EmpleadosDAO {
     public String modificarEmpleado(Connection conn, Empleados empleados) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_EMPLEADO(?, ?, ?, ?, ?)}";
+        String procedureCall = "{call UPDATE_EMPLEADO(?, ?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -68,7 +69,8 @@ public class EmpleadosDAO {
             cst.setString(3, empleados.getNombre_empleado());
             cst.setString(4, empleados.getApellido());
             cst.setString(5, empleados.getTelefono());
-
+            cst.setInt(6, empleados.getSalario());
+            
             respuesta = "Empleado modificado correctamente";
             cst.execute();
             cst.close();
@@ -116,7 +118,7 @@ public class EmpleadosDAO {
     /* --------- METODO PARA LISTAR EMPLEADOS ---------- */
     public void listarEmpleados(Connection conn, JTable tabla) {
         DefaultTableModel model;
-        String[] columnas = {"ID Empleado", "ID Ocupación", "Nombre", "Apellido", "Teléfono"};
+        String[] columnas = {"ID Empleado", "ID Ocupación", "Nombre", "Apellido", "Teléfono", "Salario"};
         model = new DefaultTableModel(null, columnas);
 
         CallableStatement cst = null;
@@ -135,8 +137,9 @@ public class EmpleadosDAO {
                 String nombre = rs.getString("NOMBRE_EMPLEADO");
                 String apellido = rs.getString("APELLIDO");
                 String telefono = rs.getString("TELEFONO");
-
-                model.addRow(new Object[]{idEmpleado, idOcupacion, nombre, apellido, telefono});
+                int salario = rs.getInt("SALARIO");
+                
+                model.addRow(new Object[]{idEmpleado, idOcupacion, nombre, apellido, telefono, salario});
             }
 
             tabla.setModel(model);
