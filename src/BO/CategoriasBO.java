@@ -16,64 +16,94 @@ public class CategoriasBO {
     private String mensaje ;
     private CategoriasDAO cdao =  new CategoriasDAO();
     
-    public String crearCategoria( Categorias cat) throws SQLException{
-        Connection conn = conexion.conectar();
-       try{
-           mensaje = cdao.crearCategoria(conn, cat);
-           conn.rollback();
-       }catch(SQLException e){
-           mensaje = mensaje + " " + e.getMessage();
-       }finally{
-           try{
-               if (conn!=null) {
-                   conn.close();
-               }
-           }catch(Exception e){
-               mensaje = mensaje + " " + e.getMessage();
-           }
-       }
+    public String crearCategoria(Categorias cat) throws SQLException {
+    Connection conn = null;
+    try {
+        conn = conexion.conectar();
+        conn.setAutoCommit(false); // Desactiva la confirmación automática
+
+        mensaje = cdao.crearCategoria(conn, cat);
         
-        return mensaje;
+        conn.commit(); // Confirma la transacción si todo fue bien
+    } catch (SQLException e) {
+        if (conn != null) {
+            try {
+                conn.rollback(); // Realiza rollback en caso de error
+            } catch (SQLException rollbackEx) {
+                mensaje = mensaje + " Error en rollback: " + rollbackEx.getMessage();
+            }
+        }
+        mensaje = mensaje + " " + e.getMessage();
+    } finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            mensaje = mensaje + " Error al cerrar la conexión: " + e.getMessage();
+        }
     }
+    return mensaje;
+}
     
     public String modificarCategoria( Categorias cat) throws SQLException{
         Connection conn = conexion.conectar();
-       try{
-           mensaje = cdao.modificarCategoria(conn, cat);
-           conn.rollback();
-       }catch(SQLException e){
-           mensaje = mensaje + " " + e.getMessage();
-       }finally{
-           try{
-               if (conn!=null) {
-                   conn.close();
-               }
-           }catch(Exception e){
-               mensaje = mensaje + " " + e.getMessage();
-           }
-       }
+       try {
+        conn = conexion.conectar();
+        conn.setAutoCommit(false); // Desactiva la confirmación automática
+
+        mensaje = cdao.modificarCategoria(conn, cat);
         
-        return mensaje;
+        conn.commit(); // Confirma la transacción si todo fue bien
+    } catch (SQLException e) {
+        if (conn != null) {
+            try {
+                conn.rollback(); // Realiza rollback en caso de error
+            } catch (SQLException rollbackEx) {
+                mensaje = mensaje + " Error en rollback: " + rollbackEx.getMessage();
+            }
+        }
+        mensaje = mensaje + " " + e.getMessage();
+    } finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            mensaje = mensaje + " Error al cerrar la conexión: " + e.getMessage();
+        }
+    }
+    return mensaje;
     }
     
     public String eliminarCategoria( int id) throws SQLException{
         Connection conn = conexion.conectar();
-       try{
-           mensaje = cdao.eliminarCategoria(conn, id);  
-           conn.rollback();
-       }catch(SQLException e){
-           mensaje = mensaje + " " + e.getMessage();
-       }finally{
-           try{
-               if (conn!=null) {
-                   conn.close();
-               }
-           }catch(Exception e){
-               mensaje = mensaje + " " + e.getMessage();
-           }
-       }
+      try {
+        conn = conexion.conectar();
+        conn.setAutoCommit(false); // Desactiva la confirmación automática
+
+        mensaje = cdao.eliminarCategoria(conn, id);
         
-        return mensaje;
+        conn.commit(); // Confirma la transacción si todo fue bien
+    } catch (SQLException e) {
+        if (conn != null) {
+            try {
+                conn.rollback(); // Realiza rollback en caso de error
+            } catch (SQLException rollbackEx) {
+                mensaje = mensaje + " Error en rollback: " + rollbackEx.getMessage();
+            }
+        }
+        mensaje = mensaje + " " + e.getMessage();
+    } finally {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            mensaje = mensaje + " Error al cerrar la conexión: " + e.getMessage();
+        }
+    }
+    return mensaje;
     }
     
     public void listarCategoria(JTable tabla) throws SQLException{

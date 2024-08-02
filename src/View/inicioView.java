@@ -37,7 +37,6 @@ public class inicioView extends javax.swing.JFrame {
         CrearCategoria = new javax.swing.JMenuItem();
         ModificarCategoria = new javax.swing.JMenuItem();
         EliminarCategoria = new javax.swing.JMenuItem();
-        ListarCategoria = new javax.swing.JMenuItem();
         ClientesMenu = new javax.swing.JMenu();
         EmpleadosMenu = new javax.swing.JMenu();
         OcupacionesMenu = new javax.swing.JMenu();
@@ -120,6 +119,11 @@ public class inicioView extends javax.swing.JFrame {
         CategoriasMenu.add(CrearCategoria);
 
         ModificarCategoria.setText("Modificar una existente");
+        ModificarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarCategoriaMouseClicked(evt);
+            }
+        });
         ModificarCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModificarCategoriaActionPerformed(evt);
@@ -128,10 +132,12 @@ public class inicioView extends javax.swing.JFrame {
         CategoriasMenu.add(ModificarCategoria);
 
         EliminarCategoria.setText("Eliminar una existente");
+        EliminarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCategoriaActionPerformed(evt);
+            }
+        });
         CategoriasMenu.add(EliminarCategoria);
-
-        ListarCategoria.setText("Listar existentes");
-        CategoriasMenu.add(ListarCategoria);
 
         jMenuBar1.add(CategoriasMenu);
 
@@ -182,7 +188,8 @@ public class inicioView extends javax.swing.JFrame {
     }//GEN-LAST:event_CategoriasMenuMouseClicked
 
     private void ModificarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCategoriaActionPerformed
-        // TODO add your handling code here:
+        ModificarcategoriaView modificar = new ModificarcategoriaView();
+        modificar.setVisible(true);
     }//GEN-LAST:event_ModificarCategoriaActionPerformed
 
     private void CrearCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCategoriaActionPerformed
@@ -201,6 +208,16 @@ public class inicioView extends javax.swing.JFrame {
     private void cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseClicked
         dispose();
     }//GEN-LAST:event_cerrarMouseClicked
+
+    private void EliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCategoriaActionPerformed
+        EliminarcategoriaView eliminar = new EliminarcategoriaView();
+        eliminar.setVisible(true);
+    }//GEN-LAST:event_EliminarCategoriaActionPerformed
+
+    private void ModificarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarCategoriaMouseClicked
+        ModificarcategoriaView modificar = new ModificarcategoriaView();
+        modificar.setVisible(true);
+    }//GEN-LAST:event_ModificarCategoriaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -243,7 +260,6 @@ public class inicioView extends javax.swing.JFrame {
     private javax.swing.JMenuItem CrearCategoria;
     private javax.swing.JMenuItem EliminarCategoria;
     private javax.swing.JMenu EmpleadosMenu;
-    private javax.swing.JMenuItem ListarCategoria;
     private javax.swing.JMenuItem ModificarCategoria;
     private javax.swing.JMenu OcupacionesMenu;
     private javax.swing.JMenu ProductosMenu;

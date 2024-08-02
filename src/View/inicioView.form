@@ -31,6 +31,7 @@
                 <Property name="text" type="java.lang.String" value="Modificar una existente"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ModificarCategoriaMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModificarCategoriaActionPerformed"/>
               </Events>
             </MenuItem>
@@ -38,11 +39,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar una existente"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="ListarCategoria">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listar existentes"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarCategoriaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

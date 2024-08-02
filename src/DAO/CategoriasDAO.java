@@ -27,31 +27,17 @@ public class CategoriasDAO {
         CallableStatement cst = null;
 
         // Se define la llamada al procedimiento almacenado
-        String procedureCall = "{call ADD_CATEGORY(?,?,?,?)}";
+        String procedureCall = "{call sp_insert_categoria(?)}";
 
         try {
-            // Se prepara el CallableStatement con la llamada al procedimiento
             cst = conn.prepareCall(procedureCall);
 
-            // Se configuran los parámetros del procedimiento almacenado
-            cst.setInt(1, categorias.getIdCategoria());     
-            cst.setString(2, categorias.getNombreCategoria()); 
-            cst.registerOutParameter(3, Types.NUMERIC);
-            cst.registerOutParameter(4, Types.VARCHAR);
+            cst.setString(1, categorias.getNombreCategoria()); 
 
-            // Ejecutamos el procedimiento almacenado
             cst.execute();
 
-            // Recuperamos los valores de los parámetros de salida
-            int outputNum = cst.getInt(3);
-            String outputMsg = cst.getString(4);
-
-            // Mensaje de éxito
-            respuesta = "Categoría almacenada sin problemas. OutputNum: " + outputNum + ", OutputMsg: " + outputMsg;
-            JOptionPane.showMessageDialog(null, respuesta);
-
         } catch (SQLException err) {
-            // En caso de error, capturamos la excepción y configuramos el mensaje de error
+           
             respuesta = "La categoría no se almacenó. Error: " + err.getMessage();
             JOptionPane.showMessageDialog(null, respuesta);
 
@@ -82,7 +68,7 @@ public class CategoriasDAO {
 
     try {
         // Preparacion y ejecucion del CallableStatement para el procedimiento
-        cst = conn.prepareCall("{call P_READ_CATEGORIA(?)}");
+        cst = conn.prepareCall("{call sp_listar_categorias(?)}");
         cst.registerOutParameter(1, Types.REF_CURSOR);  
         // Registro del parametro de salida de cursor
         cst.execute();
@@ -92,8 +78,8 @@ public class CategoriasDAO {
 
         // Repetir sobre los resultados y agregarlos al modelo de la tabla
         while (rs.next()) {
-            int id = rs.getInt("ID"); //int x String
-            String categoria = rs.getString("CATEGORIA");
+            int id = rs.getInt("id_categoria"); //int x String
+            String categoria = rs.getString("nombre_categoria");
 
             //Agregar filas
             model.addRow(new Object[]{id, categoria}); 
@@ -122,20 +108,19 @@ public class CategoriasDAO {
     public String modificarCategoria(Connection conn, Categorias categorias) {
     CallableStatement cst = null;
 
-    String procedureCall = "{call UPDATE_CATEGORY(?, ?)}";
+    String procedureCall = "{call sp_update_categoria(?, ?)}";
 
-    try {
+     try {
         if (conn == null) {
             respuesta = "Error: La conexion a la base de datos es nula";
             return respuesta;
         }
 
         cst = conn.prepareCall(procedureCall);
-
         cst.setInt(1, categorias.getIdCategoria());
         cst.setString(2, categorias.getNombreCategoria());
 
-        // Mensaje de éxito
+        // Mensaje de exito
         respuesta = "Categoria modificada correctamente";
 
         cst.execute();
@@ -159,7 +144,7 @@ public class CategoriasDAO {
    public String eliminarCategoria(Connection conn, int id) {
     CallableStatement cst = null;
 
-    String procedureCall = "{call DELETE_CATEGORY(?)}";
+    String procedureCall = "{call sp_delete_categoria(?)}";
 
     try {
         if (conn == null) {

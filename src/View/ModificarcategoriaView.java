@@ -4,15 +4,21 @@
  */
 package View;
 
+import BO.CategoriasBO;
+import Entity.Categorias;
+import java.lang.System.Logger;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import oracle.jdbc.clio.annotations.Debug.Level;
+
 /**
  *
  * @author barah
  */
 public class ModificarcategoriaView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form categoriaView
-     */
+    CategoriasBO cat = new CategoriasBO();
+    
     public ModificarcategoriaView() {
         initComponents();
     }
@@ -28,6 +34,15 @@ public class ModificarcategoriaView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         regreso = new javax.swing.JButton();
+        Titulo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        modificarId = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        modificarNombre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        modificarTabla = new javax.swing.JTable();
+        Datos = new javax.swing.JButton();
+        ModificarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,21 +60,101 @@ public class ModificarcategoriaView extends javax.swing.JFrame {
             }
         });
 
+        Titulo.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
+        Titulo.setForeground(new java.awt.Color(153, 104, 34));
+        Titulo.setText("UNDER FIRE");
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Ingresa el ID de la categoria que desea modificar");
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Ingrese el nombre por el que lo desea modificar");
+
+        modificarTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Categoria"
+            }
+        ));
+        jScrollPane1.setViewportView(modificarTabla);
+
+        Datos.setText("Mostrar Datos");
+        Datos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DatosMouseClicked(evt);
+            }
+        });
+
+        ModificarBtn.setText("Modificar");
+        ModificarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarBtnMouseClicked(evt);
+            }
+        });
+        ModificarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(606, Short.MAX_VALUE)
-                .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(Datos)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(modificarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(modificarId, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(32, 32, 32))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ModificarBtn)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(449, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(modificarId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(modificarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ModificarBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(Datos)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -84,6 +179,41 @@ public class ModificarcategoriaView extends javax.swing.JFrame {
     private void regresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_regresoActionPerformed
+public void listarCategoria()throws SQLException{
+        cat.listarCategoria(modificarTabla);
+    }
+    private void DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatosMouseClicked
+         try {
+            listarCategoria();
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CrearcategoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_DatosMouseClicked
+
+    private void ModificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModificarBtnActionPerformed
+
+    private void ModificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarBtnMouseClicked
+       try{
+           if (modificarId.getText().isEmpty() || modificarNombre.getText().isEmpty()) {
+               JOptionPane.showMessageDialog(null, "Debe ingresar datos para poder modificar la categoria");
+           }else{
+               Categorias objCategoria = new Categorias();
+               objCategoria.setIdCategoria(Integer.parseInt(modificarId.getText()));
+               objCategoria.setNombreCategoria(modificarNombre.getText());
+               
+               String mensaje = cat.modificarCategoria(objCategoria);
+                
+                JOptionPane.showMessageDialog(null, mensaje);
+                
+                modificarId.setText("");
+                modificarNombre.setText("");
+           }
+       }catch(Exception e){
+           java.util.logging.Logger.getLogger(ModificarcategoriaView.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+       }
+    }//GEN-LAST:event_ModificarBtnMouseClicked
     
     /**
      * @param args the command line arguments
@@ -124,7 +254,16 @@ public class ModificarcategoriaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Datos;
+    private javax.swing.JButton ModificarBtn;
+    private javax.swing.JLabel Titulo;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField modificarId;
+    private javax.swing.JTextField modificarNombre;
+    private javax.swing.JTable modificarTabla;
     private javax.swing.JButton regreso;
     // End of variables declaration//GEN-END:variables
 }

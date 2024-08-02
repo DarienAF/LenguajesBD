@@ -22,7 +22,6 @@ public class CrearcategoriaView extends javax.swing.JFrame {
     
     
     public void limpiarTextos(){
-        this.idCategoria.setText("");
         this.nombreCategoria.setText("");
     }
 
@@ -41,18 +40,19 @@ public class CrearcategoriaView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         regreso = new javax.swing.JButton();
-        idCategoria = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         categoriasTabla = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         nombreCategoria = new javax.swing.JTextField();
         crear = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        Titulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(67, 67, 2));
 
+        regreso.setForeground(new java.awt.Color(153, 104, 34));
         regreso.setText("Regresar");
         regreso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -65,14 +65,8 @@ public class CrearcategoriaView extends javax.swing.JFrame {
             }
         });
 
-        idCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idCategoriaActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Ingresa el ID de la nueva categoria");
-
+        categoriasTabla.setBackground(new java.awt.Color(255, 255, 255));
+        categoriasTabla.setForeground(new java.awt.Color(153, 104, 34));
         categoriasTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -86,8 +80,14 @@ public class CrearcategoriaView extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(categoriasTabla);
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ingresa el nombre de la nueva categoria");
 
+        nombreCategoria.setBackground(new java.awt.Color(255, 255, 255));
+        nombreCategoria.setForeground(new java.awt.Color(153, 104, 34));
+
+        crear.setForeground(new java.awt.Color(153, 104, 34));
         crear.setText("Crear");
         crear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -100,43 +100,62 @@ public class CrearcategoriaView extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setForeground(new java.awt.Color(153, 104, 34));
+        jButton1.setText("Ver datos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        Titulo.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
+        Titulo.setForeground(new java.awt.Color(153, 104, 34));
+        Titulo.setText("UNDER FIRE");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(crear)
-                    .addComponent(nombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(idCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(632, 632, 632)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(nombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(crear))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(nombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(crear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,16 +187,14 @@ public class CrearcategoriaView extends javax.swing.JFrame {
 
     private void crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearMouseClicked
         try {
-            if ( idCategoria.getText().isEmpty() || nombreCategoria.getText().isEmpty()) {
+            if (nombreCategoria.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar datos para poder ingresar la categoria");
                 
             }else{
                 
                 Categorias objCategoria = new Categorias();
                 
-                
-                int id = Integer.parseInt(idCategoria.getText());
-                objCategoria.setIdCategoria(id);
+                objCategoria.getIdCategoria();
                 objCategoria.setNombreCategoria(nombreCategoria.getText());
                 
             
@@ -192,14 +209,18 @@ public class CrearcategoriaView extends javax.swing.JFrame {
             Logger.getLogger(CrearcategoriaView.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_crearMouseClicked
-
-    private void idCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idCategoriaActionPerformed
-
-    public void listarCategoria()throws SQLException{
+ public void listarCategoria()throws SQLException{
         cat.listarCategoria(categoriasTabla);
     }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            listarCategoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearcategoriaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -234,10 +255,10 @@ public class CrearcategoriaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Titulo;
     private javax.swing.JTable categoriasTabla;
     private javax.swing.JButton crear;
-    private javax.swing.JTextField idCategoria;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
