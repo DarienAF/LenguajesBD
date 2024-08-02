@@ -1,4 +1,4 @@
-
+//Funcional
 package BO;
 
 import DAO.CategoriasDAO;

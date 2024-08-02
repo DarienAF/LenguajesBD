@@ -1,4 +1,4 @@
-
+//Funcional
 package DAO;
 
 //Entidad
