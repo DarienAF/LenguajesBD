@@ -108,29 +108,32 @@ public class CategoriasDAO {
     }
 }
     
-    public String modificarCategoria(Connection conn, Categorias categorias) {
+    public String modificarCategoria(Connection conn, Categorias categorias) throws SQLException {
     CallableStatement cst = null;
+    String respuesta = ""; // Declaración de la variable respuesta
 
     String procedureCall = "{call sp_update_categoria(?, ?)}";
 
+    try {
         if (conn == null) {
-            respuesta = "Error: La conexion a la base de datos es nula";
+            respuesta = "Error: La conexión a la base de datos es nula";
             return respuesta;
         }
-        //Se prepare el CallableStatment
+
+        // Se prepara el CallableStatement
         cst = conn.prepareCall(procedureCall);
 
         cst.setInt(1, categorias.getIdCategoria());
         cst.setString(2, categorias.getNombreCategoria());
 
-        // Mensaje de exito
-        respuesta = "Categoria modificada correctamente";
-        
-        //Se ejecuta el Procedimiento 
+        // Mensaje de éxito
+        respuesta = "Categoría modificada correctamente";
+
+        // Se ejecuta el procedimiento
         cst.execute();
     } catch (SQLException err) {
-        //Resouesta ante error
-        respuesta = "La categoria no se ha modificado por \nError: " + err.getMessage();
+        // Respuesta ante error
+        respuesta = "La categoría no se ha modificado por \nError: " + err.getMessage();
     } finally {
         // Cierre del CallableStatement en el bloque finally (Libera Recursos)
         if (cst != null) {
@@ -141,9 +144,10 @@ public class CategoriasDAO {
             }
         }
     }
-    //Mensaje de retorno del metodo
+    // Mensaje de retorno del método
     return respuesta;
 }
+
 
 
     /* --------- METODO PARA ELIMINAR CATEGORIA ---------- */
