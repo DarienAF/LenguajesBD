@@ -178,7 +178,7 @@ public class CrearcategoriaView extends javax.swing.JFrame {
     }//GEN-LAST:event_regresoMouseClicked
 
     private void regresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresoActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_regresoActionPerformed
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
