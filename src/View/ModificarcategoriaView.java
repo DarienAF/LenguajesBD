@@ -9,7 +9,6 @@ import Entity.Categorias;
 import java.lang.System.Logger;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import oracle.jdbc.clio.annotations.Debug.Level;
 
 /**
  *
