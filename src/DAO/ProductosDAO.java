@@ -26,17 +26,16 @@ public class ProductosDAO {
     public String crearProducto(Connection conn, Productos productos) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_PRODUCTO(?, ?, ?, ?, ?, ?)}";
+        String procedureCall = "{call sp_insertar_producto(?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, productos.getIdProducto());
-            cst.setString(2, productos.getNombreProducto());
-            cst.setInt(3, productos.getCantidadInventario());
-            cst.setInt(4, productos.getIdCategoria());
-            cst.setInt(5, productos.getIdProveedor());
-            cst.setInt(6, productos.getInventario());
+            cst.setString(1, productos.getNombreProducto());
+            cst.setInt(2, productos.getCantidadInventario());
+            cst.setInt(3, productos.getIdCategoria());
+            cst.setInt(4, productos.getIdProveedor());
+            cst.setInt(5, productos.getInventario());
 
             respuesta = "Producto creado correctamente";
             cst.execute();
@@ -59,7 +58,7 @@ public class ProductosDAO {
     public String modificarProducto(Connection conn, Productos productos) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_PRODUCTO(?, ?, ?, ?, ?, ?)}";
+        String procedureCall = "{call sp_actualizar_producto(?, ?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -92,7 +91,7 @@ public class ProductosDAO {
     public String eliminarProducto(Connection conn, int idProducto) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_PRODUCTO(?)}";
+        String procedureCall = "{call sp_eliminar_producto(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -125,7 +124,7 @@ public class ProductosDAO {
         ResultSet rs = null;
 
         try {
-            cst = conn.prepareCall("{call P_READ_PRODUCTOS(?)}");
+            cst = conn.prepareCall("{call sp_listar_productos(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 

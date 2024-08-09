@@ -27,14 +27,13 @@ public class OcupacionesDAO {
     public String crearOcupacion(Connection conn, Ocupaciones ocupacion) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_OCUPACION(?, ?, ?)}";
+        String procedureCall = "{call sp_insertar_ocupacion(?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, ocupacion.getId_ocupacion());
-            cst.setString(2, ocupacion.getNombre_ocupacion());
-            cst.setInt(3, ocupacion.getCantidad_empleados());
+            cst.setString(1, ocupacion.getNombre_ocupacion());
+            cst.setInt(2, ocupacion.getCantidad_empleados());
 
             respuesta = "Ocupación creada correctamente";
             cst.execute();
@@ -57,7 +56,7 @@ public class OcupacionesDAO {
     public String modificarOcupacion(Connection conn, Ocupaciones ocupacion) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_OCUPACION(?, ?, ?)}";
+        String procedureCall = "{call sp_actualizar_ocupacion(?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -87,7 +86,7 @@ public class OcupacionesDAO {
     public String eliminarOcupacion(Connection conn, int idOcupacion) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_OCUPACION(?)}";
+        String procedureCall = "{call sp_eliminar_ocupacion(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -120,7 +119,7 @@ public class OcupacionesDAO {
         ResultSet rs = null;
 
         try {
-            cst = conn.prepareCall("{call P_READ_OCUPACIONES(?)}");
+            cst = conn.prepareCall("{call sp_listar_ocupaciones(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 

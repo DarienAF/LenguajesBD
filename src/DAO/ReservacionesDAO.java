@@ -22,16 +22,15 @@ public class ReservacionesDAO {
     public String crearReservaciones(Connection conn, Reservaciones reservacion) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_RESERVACIONES(?, ?)}";
+        String procedureCall = "{call sp_insertar_reservacion(?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, reservacion.getId_reservaciones());
-            cst.setInt(2, reservacion.getId_cliente());
-            cst.setInt(3, reservacion.getCantidad());
+            cst.setInt(1, reservacion.getId_cliente());
+            cst.setInt(2, reservacion.getCantidad());
             java.sql.Date FechaSql = java.sql.Date.valueOf(reservacion.getDia());
-            cst.setDate(4, FechaSql);
+            cst.setDate(3, FechaSql);
 
             respuesta = "Reservacion registrada correctamente";
             cst.execute();
@@ -53,7 +52,7 @@ public class ReservacionesDAO {
     public String modificarReservaciones(Connection conn, Reservaciones reservacion) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_RESERVACIONES(?, ?)}";
+        String procedureCall = "{call sp_listar_reservaciones(?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -85,7 +84,7 @@ public class ReservacionesDAO {
     public String eliminarReservaciones(Connection conn, int id_reservaciones) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_RESERVACIONES(?)}";
+        String procedureCall = "{call sp_eliminar_reservacion(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -120,7 +119,7 @@ public class ReservacionesDAO {
         ResultSet rs = null;
 
         try {
-            cst = conn.prepareCall("{call P_READ_RESERVACIONES(?)}");
+            cst = conn.prepareCall("{call sp_listar_reservaciones(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 

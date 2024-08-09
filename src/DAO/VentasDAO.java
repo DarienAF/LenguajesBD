@@ -27,20 +27,19 @@ public class VentasDAO {
     public String crearVenta(Connection conn, Ventas venta) {
         CallableStatement cst = null;
 
-         String procedureCall = "{call ADD_VENTA(?, ?, ?, ?, ?, ?, ?)}"; 
+         String procedureCall = "{call sp_insertar_venta(?, ?, ?, ?, ?, ?)}"; 
         // Ajusta el numero de parametros
 
     try {
         cst = conn.prepareCall(procedureCall);
 
         // Configura los parametros del procedimiento almacenado
-        cst.setInt(1, venta.getIdVenta());
-        cst.setInt(2, venta.getIdProducto());
-        cst.setInt(3, venta.getIdCliente()); // Nuevo atributo
-        cst.setInt(4, venta.getIdServicio()); // Nuevo atributo
-        cst.setInt(5, venta.getCantidad());   // Nuevo atributo
-        cst.setInt(6, venta.getTotal());      // Nuevo atributo
-        cst.setDate(7, java.sql.Date.valueOf(venta.getFecha()));
+        cst.setInt(1, venta.getIdProducto());
+        cst.setInt(2, venta.getIdCliente()); // Nuevo atributo
+        cst.setInt(3, venta.getIdServicio()); // Nuevo atributo
+        cst.setInt(4, venta.getCantidad());   // Nuevo atributo
+        cst.setInt(5, venta.getTotal());      // Nuevo atributo
+        cst.setDate(6, java.sql.Date.valueOf(venta.getFecha()));
         // Convierte LocalDate a SQL Date
         
             respuesta = "Venta registrada correctamente";
@@ -64,7 +63,7 @@ public class VentasDAO {
     public String modificarVenta(Connection conn, Ventas venta) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_VENTA(?, ?, ?, ?, ?, ?, ?)}"; 
+        String procedureCall = "{call sp_actualizar_venta(?, ?, ?, ?, ?, ?, ?)}"; 
 
     try {
         cst = conn.prepareCall(procedureCall);
@@ -99,7 +98,7 @@ public class VentasDAO {
     public String eliminarVenta(Connection conn, int idVenta) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_VENTA(?)}";
+        String procedureCall = "{call sp_eliminar_venta(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -132,7 +131,7 @@ public class VentasDAO {
     ResultSet rs = null;
 
     try {
-        cst = conn.prepareCall("{call P_READ_VENTAS(?)}");
+        cst = conn.prepareCall("{call sp_listar_ventas(?)}");
         cst.registerOutParameter(1, Types.REF_CURSOR);
         cst.execute();
 

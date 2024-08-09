@@ -26,12 +26,11 @@ public class ServiciosDAO {
     public String crearServicio(Connection conn, Servicios servicio) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_SERVICIO(?, ?, ?)}";
+        String procedureCall = "{call sp_insertar_servicio(?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, servicio.getIdServicio());
             cst.setString(2, servicio.getServicio());
             cst.setInt(3, servicio.getMonto());
 
@@ -56,7 +55,7 @@ public class ServiciosDAO {
     public String modificarServicio(Connection conn, Servicios servicio) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_SERVICIO(?, ?, ?)}";
+        String procedureCall = "{call sp_actualizar_servicio(?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -86,7 +85,7 @@ public class ServiciosDAO {
     public String eliminarServicio(Connection conn, int idServicio) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_SERVICIO(?)}";
+        String procedureCall = "{call sp_eliminar_servicio(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -119,7 +118,7 @@ public class ServiciosDAO {
         ResultSet rs = null;
 
         try {
-            cst = conn.prepareCall("{call P_READ_SERVICIOS(?)}");
+            cst = conn.prepareCall("{call sp_listar_servicios(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 

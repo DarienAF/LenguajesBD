@@ -26,17 +26,16 @@ public class EmpleadosDAO {
     public String crearEmpleado(Connection conn, Empleados empleados) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_EMPLEADO(?, ?, ?, ?, ?, ?)}";
+        String procedureCall = "{call sp_insert_empleado(?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, empleados.getId_empleado());
-            cst.setInt(2, empleados.getId_ocupacion());
-            cst.setString(3, empleados.getNombre_empleado());
-            cst.setString(4, empleados.getApellido());
-            cst.setString(5, empleados.getTelefono());
-            cst.setInt(6, empleados.getSalario());
+            cst.setInt(1, empleados.getId_ocupacion());
+            cst.setString(2, empleados.getNombre_empleado());
+            cst.setString(3, empleados.getApellido());
+            cst.setString(4, empleados.getTelefono());
+            cst.setInt(5, empleados.getSalario());
             
             respuesta = "Empleado creado correctamente";
             cst.execute();
@@ -59,7 +58,7 @@ public class EmpleadosDAO {
     public String modificarEmpleado(Connection conn, Empleados empleados) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_EMPLEADO(?, ?, ?, ?, ?, ?)}";
+        String procedureCall = "{call sp_update_empleado(?, ?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -92,7 +91,7 @@ public class EmpleadosDAO {
     public String eliminarEmpleado(Connection conn, int idEmpleado) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_EMPLEADO(?)}";
+        String procedureCall = "{call sp_delete_empleado(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -125,7 +124,7 @@ public class EmpleadosDAO {
         ResultSet rs = null;
 
         try {
-            cst = conn.prepareCall("{call P_READ_EMPLEADOS(?)}");
+            cst = conn.prepareCall("{call sp_listar_empleados(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 

@@ -26,15 +26,14 @@ public class ClientesDAO {
     public String crearCliente(Connection conn, Clientes clientes) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_CLIENTE(?, ?, ?, ?)}";
+        String procedureCall = "{call sp_insert_cliente(?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, clientes.getId_cliente());
-            cst.setString(2, clientes.getNombre_cliente());
-            cst.setString(3, clientes.getTelefono());
-            cst.setString(4, clientes.getNumero());
+            cst.setString(1, clientes.getNombre_cliente());
+            cst.setString(2, clientes.getTelefono());
+            cst.setString(3, clientes.getNumero());
 
             respuesta = "Cliente creado correctamente";
             cst.execute();
@@ -57,7 +56,7 @@ public class ClientesDAO {
     public String modificarCliente(Connection conn, Clientes clientes) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_CLIENTE(?, ?, ?, ?)}";
+        String procedureCall = "{call sp_update_cliente(?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -88,7 +87,7 @@ public class ClientesDAO {
     public String eliminarCliente(Connection conn, int idCliente) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_CLIENTE(?)}";
+        String procedureCall = "{call sp_delete_cliente(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -121,7 +120,7 @@ public class ClientesDAO {
         ResultSet rs = null;
 
         try {
-            cst = conn.prepareCall("{call P_READ_CLIENTES(?)}");
+            cst = conn.prepareCall("{call sp_listar_clientes(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 

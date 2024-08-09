@@ -26,16 +26,15 @@ public class ProveedorDAO {
     public String crearProveedor(Connection conn, Proveedor proveedor) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call ADD_PROVEEDOR(?, ?, ?, ?)}";
+        String procedureCall = "{call sp_insertar_proveedor(?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, proveedor.getIdProveedor());
-            cst.setString(2, proveedor.getNombreProveedor());
-            cst.setString(3, proveedor.getCorreo());
-            cst.setString(4, proveedor.getContacto());
-            cst.setString(5, proveedor.getDireccion());
+            cst.setString(1, proveedor.getNombreProveedor());
+            cst.setString(2, proveedor.getCorreo());
+            cst.setString(3, proveedor.getContacto());
+            cst.setString(4, proveedor.getDireccion());
 
             respuesta = "Proveedor registrado correctamente";
             cst.execute();
@@ -58,7 +57,7 @@ public class ProveedorDAO {
     public String modificarProveedor(Connection conn, Proveedor proveedor) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call UPDATE_PROVEEDOR(?, ?, ?, ?, ?)}";
+        String procedureCall = "{call sp_actualizar_proveedor(?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -90,7 +89,7 @@ public class ProveedorDAO {
     public String eliminarProveedor(Connection conn, int idProveedor) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call DELETE_PROVEEDOR(?)}";
+        String procedureCall = "{call sp_eliminar_proveedor(?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
@@ -123,7 +122,7 @@ public class ProveedorDAO {
         ResultSet rs = null;
 
         try {
-            cst = conn.prepareCall("{call P_READ_PROVEEDORES(?)}");
+            cst = conn.prepareCall("{call sp_listar_proveedores(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 
