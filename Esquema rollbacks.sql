@@ -620,11 +620,12 @@ END;
 /* -----------------SERVICIOS-----------------*/
     --create
 CREATE OR REPLACE PROCEDURE sp_insertar_servicio (
-    p_monto_s IN NUMBER
+    p_monto_s IN NUMBER,
+    p_servicio IN VARCHAR2
 ) AS
 BEGIN
-    INSERT INTO Servicios (id_servicio, monto_s)
-    VALUES (seq_servicios.NEXTVAL, p_monto_s);
+    INSERT INTO Servicios (id_servicio, monto_s, servicio)
+    VALUES (seq_servicios.NEXTVAL, p_monto_s, p_servicio);
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
@@ -638,18 +639,20 @@ CREATE OR REPLACE PROCEDURE sp_listar_servicios (
 ) AS
 BEGIN
     OPEN p_servicios FOR
-    SELECT id_servicio, monto_s
+    SELECT id_servicio, monto_s, servicio
     FROM Servicios;
 END;
 
     --update
 CREATE OR REPLACE PROCEDURE sp_actualizar_servicio (
     p_id_servicio IN NUMBER,
-    p_monto_s IN NUMBER
+    p_monto_s IN NUMBER,
+    p_servicio IN VARCHAR2
 ) AS
 BEGIN
     UPDATE Servicios
-    SET monto_s = p_monto_s
+    SET monto_s = p_monto_s,
+        servicio = p_servicio
     WHERE id_servicio = p_id_servicio;
     COMMIT;
 EXCEPTION
