@@ -167,7 +167,7 @@ public void listarCategoria()throws SQLException{
                 JOptionPane.showMessageDialog(null, "Debe ingresar el id para poder eliminar la categoria");
                 
             }else{
-                CategoriasBO cat = new CategoriasBO();
+                
                 int idEliminar = Integer.parseInt(IdEliminar.getText());
                 String mensaje = cat.eliminarCategoria(idEliminar);
                 

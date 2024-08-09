@@ -38,6 +38,9 @@ public class inicioView extends javax.swing.JFrame {
         ModificarCategoria = new javax.swing.JMenuItem();
         EliminarCategoria = new javax.swing.JMenuItem();
         ClientesMenu = new javax.swing.JMenu();
+        CrearCliente = new javax.swing.JMenuItem();
+        EliminarCliente = new javax.swing.JMenuItem();
+        ModificarCliente = new javax.swing.JMenuItem();
         EmpleadosMenu = new javax.swing.JMenu();
         OcupacionesMenu = new javax.swing.JMenu();
         ProductosMenu = new javax.swing.JMenu();
@@ -142,6 +145,46 @@ public class inicioView extends javax.swing.JFrame {
         jMenuBar1.add(CategoriasMenu);
 
         ClientesMenu.setText("Clientes");
+
+        CrearCliente.setText("Crear uno nuevo");
+        CrearCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearClienteMouseClicked(evt);
+            }
+        });
+        CrearCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearClienteActionPerformed(evt);
+            }
+        });
+        ClientesMenu.add(CrearCliente);
+
+        EliminarCliente.setText("Eliminar uno existente");
+        EliminarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarClienteMouseClicked(evt);
+            }
+        });
+        EliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarClienteActionPerformed(evt);
+            }
+        });
+        ClientesMenu.add(EliminarCliente);
+
+        ModificarCliente.setText("Modificar uno existente");
+        ModificarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarClienteMouseClicked(evt);
+            }
+        });
+        ModificarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarClienteActionPerformed(evt);
+            }
+        });
+        ClientesMenu.add(ModificarCliente);
+
         jMenuBar1.add(ClientesMenu);
 
         EmpleadosMenu.setText("Empleados");
@@ -219,6 +262,36 @@ public class inicioView extends javax.swing.JFrame {
         modificar.setVisible(true);
     }//GEN-LAST:event_ModificarCategoriaMouseClicked
 
+    private void CrearClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearClienteMouseClicked
+        CrearclienteView crear = new CrearclienteView();
+        crear.setVisible(true);
+    }//GEN-LAST:event_CrearClienteMouseClicked
+
+    private void EliminarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarClienteMouseClicked
+        EliminarclienteView eliminar = new EliminarclienteView();
+        eliminar.setVisible(true);
+    }//GEN-LAST:event_EliminarClienteMouseClicked
+
+    private void ModificarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarClienteMouseClicked
+       ModificarclienteView modificar = new ModificarclienteView();
+       modificar.setVisible(true);
+    }//GEN-LAST:event_ModificarClienteMouseClicked
+
+    private void CrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearClienteActionPerformed
+        CrearclienteView crear = new CrearclienteView();
+        crear.setVisible(true);
+    }//GEN-LAST:event_CrearClienteActionPerformed
+
+    private void EliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarClienteActionPerformed
+        EliminarclienteView eliminar = new EliminarclienteView();
+        eliminar.setVisible(true);
+    }//GEN-LAST:event_EliminarClienteActionPerformed
+
+    private void ModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarClienteActionPerformed
+      ModificarclienteView modificar = new ModificarclienteView();
+       modificar.setVisible(true);
+    }//GEN-LAST:event_ModificarClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,9 +331,12 @@ public class inicioView extends javax.swing.JFrame {
     private javax.swing.JMenu CategoriasMenu;
     private javax.swing.JMenu ClientesMenu;
     private javax.swing.JMenuItem CrearCategoria;
+    private javax.swing.JMenuItem CrearCliente;
     private javax.swing.JMenuItem EliminarCategoria;
+    private javax.swing.JMenuItem EliminarCliente;
     private javax.swing.JMenu EmpleadosMenu;
     private javax.swing.JMenuItem ModificarCategoria;
+    private javax.swing.JMenuItem ModificarCliente;
     private javax.swing.JMenu OcupacionesMenu;
     private javax.swing.JMenu ProductosMenu;
     private javax.swing.JMenu ProveedoresMenu;
