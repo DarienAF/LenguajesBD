@@ -37,17 +37,47 @@ public class inicioView extends javax.swing.JFrame {
         CrearCategoria = new javax.swing.JMenuItem();
         ModificarCategoria = new javax.swing.JMenuItem();
         EliminarCategoria = new javax.swing.JMenuItem();
+        ListarCategorias = new javax.swing.JMenuItem();
         ClientesMenu = new javax.swing.JMenu();
         CrearCliente = new javax.swing.JMenuItem();
         EliminarCliente = new javax.swing.JMenuItem();
         ModificarCliente = new javax.swing.JMenuItem();
+        ListarClientes = new javax.swing.JMenuItem();
         EmpleadosMenu = new javax.swing.JMenu();
+        CrearEmp = new javax.swing.JMenuItem();
+        modificarEmp = new javax.swing.JMenuItem();
+        EliminarEmp = new javax.swing.JMenuItem();
+        ListarEmp = new javax.swing.JMenuItem();
         OcupacionesMenu = new javax.swing.JMenu();
+        CrearOcu = new javax.swing.JMenuItem();
+        ModificarOcu = new javax.swing.JMenuItem();
+        EliminarOcu = new javax.swing.JMenuItem();
+        ListarOcu = new javax.swing.JMenuItem();
         ProductosMenu = new javax.swing.JMenu();
+        CrearProdu = new javax.swing.JMenuItem();
+        modificarProdu = new javax.swing.JMenuItem();
+        EliminarProdu = new javax.swing.JMenuItem();
+        ListarProdu = new javax.swing.JMenuItem();
         ProveedoresMenu = new javax.swing.JMenu();
+        CrearProvee = new javax.swing.JMenuItem();
+        ModificarProvee = new javax.swing.JMenuItem();
+        EliminarProvee = new javax.swing.JMenuItem();
+        ListarProvee = new javax.swing.JMenuItem();
         ReservacionesMenu = new javax.swing.JMenu();
+        CrearReserv = new javax.swing.JMenuItem();
+        ModificarReserv = new javax.swing.JMenuItem();
+        EliminarReserv = new javax.swing.JMenuItem();
+        ListarReserv = new javax.swing.JMenuItem();
         ServiciosMenu = new javax.swing.JMenu();
+        CrearServicios = new javax.swing.JMenuItem();
+        ModificarServicios = new javax.swing.JMenuItem();
+        EliminarServicios = new javax.swing.JMenuItem();
+        ListarServicios = new javax.swing.JMenuItem();
         VentasMenu = new javax.swing.JMenu();
+        CrearVenta = new javax.swing.JMenuItem();
+        ModificarVenta = new javax.swing.JMenuItem();
+        EliminarVenta = new javax.swing.JMenuItem();
+        ListarVenta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,6 +172,14 @@ public class inicioView extends javax.swing.JFrame {
         });
         CategoriasMenu.add(EliminarCategoria);
 
+        ListarCategorias.setText("Listar existentes");
+        ListarCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarCategoriasMouseClicked(evt);
+            }
+        });
+        CategoriasMenu.add(ListarCategorias);
+
         jMenuBar1.add(CategoriasMenu);
 
         ClientesMenu.setText("Clientes");
@@ -185,27 +223,326 @@ public class inicioView extends javax.swing.JFrame {
         });
         ClientesMenu.add(ModificarCliente);
 
+        ListarClientes.setText("Listar existentes");
+        ListarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarClientesMouseClicked(evt);
+            }
+        });
+        ClientesMenu.add(ListarClientes);
+
         jMenuBar1.add(ClientesMenu);
 
         EmpleadosMenu.setText("Empleados");
+
+        CrearEmp.setText("Crear uno nuevo");
+        CrearEmp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearEmpMouseClicked(evt);
+            }
+        });
+        CrearEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearEmpActionPerformed(evt);
+            }
+        });
+        EmpleadosMenu.add(CrearEmp);
+
+        modificarEmp.setText("Modificar uno existente");
+        modificarEmp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarEmpMouseClicked(evt);
+            }
+        });
+        modificarEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarEmpActionPerformed(evt);
+            }
+        });
+        EmpleadosMenu.add(modificarEmp);
+
+        EliminarEmp.setText("Eliminar uno existente");
+        EliminarEmp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarEmpMouseClicked(evt);
+            }
+        });
+        EliminarEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarEmpActionPerformed(evt);
+            }
+        });
+        EmpleadosMenu.add(EliminarEmp);
+
+        ListarEmp.setText("Listar existentes");
+        ListarEmp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarEmpMouseClicked(evt);
+            }
+        });
+        ListarEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarEmpActionPerformed(evt);
+            }
+        });
+        EmpleadosMenu.add(ListarEmp);
+
         jMenuBar1.add(EmpleadosMenu);
 
         OcupacionesMenu.setText("Ocupaciones");
+
+        CrearOcu.setText("Crear una nueva");
+        CrearOcu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearOcuMouseClicked(evt);
+            }
+        });
+        CrearOcu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearOcuActionPerformed(evt);
+            }
+        });
+        OcupacionesMenu.add(CrearOcu);
+
+        ModificarOcu.setText("Modificar una existente");
+        ModificarOcu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModificarOcuMouseClicked(evt);
+            }
+        });
+        ModificarOcu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarOcuActionPerformed(evt);
+            }
+        });
+        OcupacionesMenu.add(ModificarOcu);
+
+        EliminarOcu.setText("Eliminar una existente");
+        EliminarOcu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarOcuMouseClicked(evt);
+            }
+        });
+        EliminarOcu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarOcuActionPerformed(evt);
+            }
+        });
+        OcupacionesMenu.add(EliminarOcu);
+
+        ListarOcu.setText("Listar existentes");
+        ListarOcu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarOcuMouseClicked(evt);
+            }
+        });
+        ListarOcu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarOcuActionPerformed(evt);
+            }
+        });
+        OcupacionesMenu.add(ListarOcu);
+
         jMenuBar1.add(OcupacionesMenu);
 
         ProductosMenu.setText("Productos");
+
+        CrearProdu.setText("Crear uno nuevo");
+        CrearProdu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearProduMouseClicked(evt);
+            }
+        });
+        CrearProdu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearProduActionPerformed(evt);
+            }
+        });
+        ProductosMenu.add(CrearProdu);
+
+        modificarProdu.setText("Modificar uno existente");
+        modificarProdu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarProduMouseClicked(evt);
+            }
+        });
+        modificarProdu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarProduActionPerformed(evt);
+            }
+        });
+        ProductosMenu.add(modificarProdu);
+
+        EliminarProdu.setText("Eliminar uno existente");
+        EliminarProdu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarProduMouseClicked(evt);
+            }
+        });
+        EliminarProdu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarProduActionPerformed(evt);
+            }
+        });
+        ProductosMenu.add(EliminarProdu);
+
+        ListarProdu.setText("Listar existentes");
+        ListarProdu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListarProduMouseClicked(evt);
+            }
+        });
+        ListarProdu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarProduActionPerformed(evt);
+            }
+        });
+        ProductosMenu.add(ListarProdu);
+
         jMenuBar1.add(ProductosMenu);
 
         ProveedoresMenu.setText("Proveedores");
+
+        CrearProvee.setText("Crear uno nuevo");
+        CrearProvee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearProveeActionPerformed(evt);
+            }
+        });
+        ProveedoresMenu.add(CrearProvee);
+
+        ModificarProvee.setText("Modificar uno nuevo");
+        ModificarProvee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarProveeActionPerformed(evt);
+            }
+        });
+        ProveedoresMenu.add(ModificarProvee);
+
+        EliminarProvee.setText("Eliminar uno nuevo");
+        EliminarProvee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarProveeActionPerformed(evt);
+            }
+        });
+        ProveedoresMenu.add(EliminarProvee);
+
+        ListarProvee.setText("Listar existente");
+        ListarProvee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarProveeActionPerformed(evt);
+            }
+        });
+        ProveedoresMenu.add(ListarProvee);
+
         jMenuBar1.add(ProveedoresMenu);
 
         ReservacionesMenu.setText("Reservaciones");
+
+        CrearReserv.setText("Crear una nueva");
+        CrearReserv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearReservActionPerformed(evt);
+            }
+        });
+        ReservacionesMenu.add(CrearReserv);
+
+        ModificarReserv.setText("Modificar una existente");
+        ModificarReserv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarReservActionPerformed(evt);
+            }
+        });
+        ReservacionesMenu.add(ModificarReserv);
+
+        EliminarReserv.setText("Eliminar una existente");
+        EliminarReserv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarReservActionPerformed(evt);
+            }
+        });
+        ReservacionesMenu.add(EliminarReserv);
+
+        ListarReserv.setText("Listar existentes");
+        ListarReserv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarReservActionPerformed(evt);
+            }
+        });
+        ReservacionesMenu.add(ListarReserv);
+
         jMenuBar1.add(ReservacionesMenu);
 
         ServiciosMenu.setText("Servicios");
+
+        CrearServicios.setText("Crear uno nuevo");
+        CrearServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearServiciosActionPerformed(evt);
+            }
+        });
+        ServiciosMenu.add(CrearServicios);
+
+        ModificarServicios.setText("Modificar uno existente");
+        ModificarServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarServiciosActionPerformed(evt);
+            }
+        });
+        ServiciosMenu.add(ModificarServicios);
+
+        EliminarServicios.setText("Eliminar uno existente");
+        EliminarServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarServiciosActionPerformed(evt);
+            }
+        });
+        ServiciosMenu.add(EliminarServicios);
+
+        ListarServicios.setText("Listar existentes");
+        ListarServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarServiciosActionPerformed(evt);
+            }
+        });
+        ServiciosMenu.add(ListarServicios);
+
         jMenuBar1.add(ServiciosMenu);
 
         VentasMenu.setText("Ventas");
+
+        CrearVenta.setText("Crear una nueva");
+        CrearVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearVentaActionPerformed(evt);
+            }
+        });
+        VentasMenu.add(CrearVenta);
+
+        ModificarVenta.setText("Modificar una existente");
+        ModificarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarVentaActionPerformed(evt);
+            }
+        });
+        VentasMenu.add(ModificarVenta);
+
+        EliminarVenta.setText("Eliminar una existente");
+        EliminarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarVentaActionPerformed(evt);
+            }
+        });
+        VentasMenu.add(EliminarVenta);
+
+        ListarVenta.setText("Listar existentes");
+        ListarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarVentaActionPerformed(evt);
+            }
+        });
+        VentasMenu.add(ListarVenta);
+
         jMenuBar1.add(VentasMenu);
 
         setJMenuBar(jMenuBar1);
@@ -292,6 +629,216 @@ public class inicioView extends javax.swing.JFrame {
        modificar.setVisible(true);
     }//GEN-LAST:event_ModificarClienteActionPerformed
 
+    private void ListarProveeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarProveeActionPerformed
+        ListarproveedorView Lprov = new ListarproveedorView();
+        Lprov.setVisible(true);
+    }//GEN-LAST:event_ListarProveeActionPerformed
+
+    private void ListarReservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarReservActionPerformed
+        ListarreservacionView Lres = new ListarreservacionView();
+        Lres.setVisible(true);
+    }//GEN-LAST:event_ListarReservActionPerformed
+
+    private void CrearServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearServiciosActionPerformed
+        CrearserviciosView Cserv = new CrearserviciosView();
+        Cserv.setVisible(true);
+    }//GEN-LAST:event_CrearServiciosActionPerformed
+
+    private void ListarCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarCategoriasMouseClicked
+        ListarcategoriaView lct = new ListarcategoriaView();
+        lct.setVisible(true);
+    }//GEN-LAST:event_ListarCategoriasMouseClicked
+
+    private void ListarClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarClientesMouseClicked
+        ListarclienteView lcl = new ListarclienteView();
+        lcl.setVisible(true);
+    }//GEN-LAST:event_ListarClientesMouseClicked
+
+    private void CrearEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearEmpMouseClicked
+        CrearempleadoView lemp = new CrearempleadoView();
+        lemp.setVisible(true);
+    }//GEN-LAST:event_CrearEmpMouseClicked
+
+    private void modificarEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarEmpMouseClicked
+       ModificarempleadoView memp = new ModificarempleadoView();
+       memp.setVisible(true);
+    }//GEN-LAST:event_modificarEmpMouseClicked
+
+    private void EliminarEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarEmpMouseClicked
+        EliminarempleadoView Eemp = new EliminarempleadoView();
+        Eemp.setVisible(true);
+    }//GEN-LAST:event_EliminarEmpMouseClicked
+
+    private void ListarEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarEmpMouseClicked
+        ListarempleadoView lemp = new ListarempleadoView();
+        lemp.setVisible(true);
+    }//GEN-LAST:event_ListarEmpMouseClicked
+
+    private void CrearEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearEmpActionPerformed
+        CrearempleadoView lemp = new CrearempleadoView();
+        lemp.setVisible(true);
+    }//GEN-LAST:event_CrearEmpActionPerformed
+
+    private void CrearOcuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearOcuMouseClicked
+        CrearocupacionesView Cocu = new CrearocupacionesView();
+        Cocu.setVisible(true);
+    }//GEN-LAST:event_CrearOcuMouseClicked
+
+    private void ModificarOcuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModificarOcuMouseClicked
+        ModificarocupacionesView Mocu = new ModificarocupacionesView();
+        Mocu.setVisible(true);
+    }//GEN-LAST:event_ModificarOcuMouseClicked
+
+    private void EliminarOcuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarOcuMouseClicked
+        EliminarocupacionesView Eocu = new EliminarocupacionesView();
+        Eocu.setVisible(true);
+    }//GEN-LAST:event_EliminarOcuMouseClicked
+
+    private void ListarOcuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarOcuMouseClicked
+        ListarocupacionesView Locu = new ListarocupacionesView();
+        Locu.setVisible(true);
+    }//GEN-LAST:event_ListarOcuMouseClicked
+
+    private void CrearProduMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearProduMouseClicked
+        CrearproductoView Cpro = new CrearproductoView();
+        Cpro.setVisible(true);
+    }//GEN-LAST:event_CrearProduMouseClicked
+
+    private void modificarProduMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarProduMouseClicked
+        ModificarproductoView Mpro = new ModificarproductoView();
+        Mpro.setVisible(true);
+    }//GEN-LAST:event_modificarProduMouseClicked
+
+    private void EliminarProduMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarProduMouseClicked
+        EliminarproductoView Epro = new EliminarproductoView();
+        Epro.setVisible(true);
+    }//GEN-LAST:event_EliminarProduMouseClicked
+
+    private void ListarProduMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListarProduMouseClicked
+        ListarproductoView Lpro = new ListarproductoView();
+        Lpro.setVisible(true);
+    }//GEN-LAST:event_ListarProduMouseClicked
+
+    private void modificarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarEmpActionPerformed
+       ModificarempleadoView memp = new ModificarempleadoView();
+       memp.setVisible(true);
+    }//GEN-LAST:event_modificarEmpActionPerformed
+
+    private void EliminarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarEmpActionPerformed
+         EliminarempleadoView Eemp = new EliminarempleadoView();
+        Eemp.setVisible(true);
+    }//GEN-LAST:event_EliminarEmpActionPerformed
+
+    private void ListarEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarEmpActionPerformed
+         ListarempleadoView lemp = new ListarempleadoView();
+        lemp.setVisible(true);
+    }//GEN-LAST:event_ListarEmpActionPerformed
+
+    private void CrearOcuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearOcuActionPerformed
+        CrearocupacionesView Cocu = new CrearocupacionesView();
+        Cocu.setVisible(true);
+    }//GEN-LAST:event_CrearOcuActionPerformed
+
+    private void ModificarOcuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarOcuActionPerformed
+        ModificarocupacionesView Mocu = new ModificarocupacionesView();
+        Mocu.setVisible(true);
+    }//GEN-LAST:event_ModificarOcuActionPerformed
+
+    private void EliminarOcuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarOcuActionPerformed
+       EliminarocupacionesView Eocu = new EliminarocupacionesView();
+        Eocu.setVisible(true);
+    }//GEN-LAST:event_EliminarOcuActionPerformed
+
+    private void ListarOcuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarOcuActionPerformed
+      ListarocupacionesView Locu = new ListarocupacionesView();
+        Locu.setVisible(true);
+    }//GEN-LAST:event_ListarOcuActionPerformed
+
+    private void CrearProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearProduActionPerformed
+        CrearproductoView Cpro = new CrearproductoView();
+        Cpro.setVisible(true);
+    }//GEN-LAST:event_CrearProduActionPerformed
+
+    private void modificarProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarProduActionPerformed
+       ModificarproductoView Mpro = new ModificarproductoView();
+        Mpro.setVisible(true);
+    }//GEN-LAST:event_modificarProduActionPerformed
+
+    private void EliminarProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarProduActionPerformed
+        EliminarproductoView Epro = new EliminarproductoView();
+        Epro.setVisible(true);
+    }//GEN-LAST:event_EliminarProduActionPerformed
+
+    private void ListarProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarProduActionPerformed
+         ListarproductoView Lpro = new ListarproductoView();
+        Lpro.setVisible(true);
+    }//GEN-LAST:event_ListarProduActionPerformed
+
+    private void CrearProveeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearProveeActionPerformed
+        CrearproveedorView Cprov = new CrearproveedorView();
+        Cprov.setVisible(true);
+    }//GEN-LAST:event_CrearProveeActionPerformed
+
+    private void ModificarProveeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarProveeActionPerformed
+        ModificarproveedorView Mprov = new ModificarproveedorView();
+        Mprov.setVisible(true);
+    }//GEN-LAST:event_ModificarProveeActionPerformed
+
+    private void EliminarProveeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarProveeActionPerformed
+        EliminarproveedorView Eprov = new EliminarproveedorView();
+        Eprov.setVisible(true);
+    }//GEN-LAST:event_EliminarProveeActionPerformed
+
+    private void CrearReservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearReservActionPerformed
+       CrearreservacionView Cres = new CrearreservacionView();
+       Cres.setVisible(true);
+    }//GEN-LAST:event_CrearReservActionPerformed
+
+    private void ModificarReservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarReservActionPerformed
+       ModificarreservacionView Mres = new ModificarreservacionView();
+       Mres.setVisible(true);
+    }//GEN-LAST:event_ModificarReservActionPerformed
+
+    private void EliminarReservActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarReservActionPerformed
+        EliminarreservacionView Eres = new EliminarreservacionView();
+        Eres.setVisible(true);
+    }//GEN-LAST:event_EliminarReservActionPerformed
+
+    private void ModificarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarServiciosActionPerformed
+        ModificarserviciosView Mserv = new ModificarserviciosView();
+        Mserv.setVisible(true);
+    }//GEN-LAST:event_ModificarServiciosActionPerformed
+
+    private void EliminarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarServiciosActionPerformed
+        EliminarserviciosView Eserv = new EliminarserviciosView();
+        Eserv.setVisible(true);
+    }//GEN-LAST:event_EliminarServiciosActionPerformed
+
+    private void ListarServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarServiciosActionPerformed
+        ListarserviciosView Lserv = new ListarserviciosView();
+        Lserv.setVisible(true);
+    }//GEN-LAST:event_ListarServiciosActionPerformed
+
+    private void CrearVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearVentaActionPerformed
+        CrearventasView Cven = new CrearventasView();
+        Cven.setVisible(true);
+    }//GEN-LAST:event_CrearVentaActionPerformed
+
+    private void ModificarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarVentaActionPerformed
+       ModificarventasView Mven = new ModificarventasView();
+       Mven.setVisible(true);
+    }//GEN-LAST:event_ModificarVentaActionPerformed
+
+    private void EliminarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarVentaActionPerformed
+        EliminarventasView Even = new EliminarventasView();
+        Even.setVisible(true);
+    }//GEN-LAST:event_EliminarVentaActionPerformed
+
+    private void ListarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarVentaActionPerformed
+        ListarventasView Lven = new ListarventasView();
+        Lven.setVisible(true);
+    }//GEN-LAST:event_ListarVentaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -332,11 +879,39 @@ public class inicioView extends javax.swing.JFrame {
     private javax.swing.JMenu ClientesMenu;
     private javax.swing.JMenuItem CrearCategoria;
     private javax.swing.JMenuItem CrearCliente;
+    private javax.swing.JMenuItem CrearEmp;
+    private javax.swing.JMenuItem CrearOcu;
+    private javax.swing.JMenuItem CrearProdu;
+    private javax.swing.JMenuItem CrearProvee;
+    private javax.swing.JMenuItem CrearReserv;
+    private javax.swing.JMenuItem CrearServicios;
+    private javax.swing.JMenuItem CrearVenta;
     private javax.swing.JMenuItem EliminarCategoria;
     private javax.swing.JMenuItem EliminarCliente;
+    private javax.swing.JMenuItem EliminarEmp;
+    private javax.swing.JMenuItem EliminarOcu;
+    private javax.swing.JMenuItem EliminarProdu;
+    private javax.swing.JMenuItem EliminarProvee;
+    private javax.swing.JMenuItem EliminarReserv;
+    private javax.swing.JMenuItem EliminarServicios;
+    private javax.swing.JMenuItem EliminarVenta;
     private javax.swing.JMenu EmpleadosMenu;
+    private javax.swing.JMenuItem ListarCategorias;
+    private javax.swing.JMenuItem ListarClientes;
+    private javax.swing.JMenuItem ListarEmp;
+    private javax.swing.JMenuItem ListarOcu;
+    private javax.swing.JMenuItem ListarProdu;
+    private javax.swing.JMenuItem ListarProvee;
+    private javax.swing.JMenuItem ListarReserv;
+    private javax.swing.JMenuItem ListarServicios;
+    private javax.swing.JMenuItem ListarVenta;
     private javax.swing.JMenuItem ModificarCategoria;
     private javax.swing.JMenuItem ModificarCliente;
+    private javax.swing.JMenuItem ModificarOcu;
+    private javax.swing.JMenuItem ModificarProvee;
+    private javax.swing.JMenuItem ModificarReserv;
+    private javax.swing.JMenuItem ModificarServicios;
+    private javax.swing.JMenuItem ModificarVenta;
     private javax.swing.JMenu OcupacionesMenu;
     private javax.swing.JMenu ProductosMenu;
     private javax.swing.JMenu ProveedoresMenu;
@@ -348,5 +923,7 @@ public class inicioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem modificarEmp;
+    private javax.swing.JMenuItem modificarProdu;
     // End of variables declaration//GEN-END:variables
 }
