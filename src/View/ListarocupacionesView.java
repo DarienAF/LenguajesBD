@@ -4,13 +4,12 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import BO.ClientesBO;
-import Entity.Categorias;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import proyectolenguajes.ConexionBD;
 
 /**
  *
@@ -18,14 +17,81 @@ import java.sql.SQLException;
  */
 public class ListarocupacionesView extends javax.swing.JFrame {
 
-
-    
-    
-   
-
     public ListarocupacionesView() {
         initComponents();
+        Mostrar_datos.setText("Mostrar datos");
+        Mostrar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mostrar_el_empleadoActionPerformed(evt);
+            }
+        });
+
+        // Agregar ActionListener para el botón Limpiar_datos
+        Limpiar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Limpiar_datosActionPerformed(evt);
+            }
+        });
     }
+
+    private void Limpiar_datosActionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtener el modelo de la tabla
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TablaMostrarOcupacion.getModel();
+        model.setRowCount(0); // Limpiar todas las filas
+    }
+
+    private void Mostrar_el_empleadoActionPerformed(java.awt.event.ActionEvent evt) {
+        // Limpiar la tabla antes de mostrar nuevos datos
+        Limpiar_datosActionPerformed(evt);
+
+        ConexionBD conexionBD = new ConexionBD();
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = (Connection) conexionBD.conectar();
+            if (conn != null) {
+                String query = "SELECT ID_OCUPACION, NOMBRE_OCUPACION, CANTIDAD_EMPLEADOS FROM OCUPACIONES";
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(query);
+
+                // Obtener el modelo de la tabla
+                javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TablaMostrarOcupacion.getModel();
+
+                // Llenar la tabla con los datos
+                while (rs.next()) {
+                    int id = rs.getInt("ID_OCUPACION");
+                    String nombre = rs.getString("NOMBRE_OCUPACION");
+                    int cantidad = rs.getInt("CANTIDAD_EMPLEADOS");
+
+                    model.addRow(new Object[]{id, nombre, cantidad});
+                }
+            } else {
+                System.out.println("Conexión fallida");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error de SQL: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Cerrar ResultSet, Statement y Connection
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            conexionBD.cerrarConexion((java.sql.Connection) conn);
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,9 +105,10 @@ public class ListarocupacionesView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        TablaMostrarOcupacion = new javax.swing.JTable();
+        Mostrar_datos = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
+        Limpiar_datos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,20 +118,41 @@ public class ListarocupacionesView extends javax.swing.JFrame {
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaMostrarOcupacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID_OCUPACION", "NOMBRE", "CANTIDAD_EMPLEADOS"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaMostrarOcupacion);
 
-        jButton1.setText("jButton1");
+        Mostrar_datos.setText("Mostrar datos");
+        Mostrar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mostrar_datosActionPerformed(evt);
+            }
+        });
 
         regreso2.setText("Regresar");
         regreso2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,35 +161,41 @@ public class ListarocupacionesView extends javax.swing.JFrame {
             }
         });
 
+        Limpiar_datos.setText("Limpiar datos");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Mostrar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(Limpiar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Mostrar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Limpiar_datos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -122,8 +216,11 @@ public class ListarocupacionesView extends javax.swing.JFrame {
     private void regreso2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso2MouseClicked
         dispose();
     }//GEN-LAST:event_regreso2MouseClicked
-  
-   
+
+    private void Mostrar_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mostrar_datosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Mostrar_datosActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -172,11 +269,12 @@ public class ListarocupacionesView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Limpiar_datos;
+    private javax.swing.JButton Mostrar_datos;
+    private javax.swing.JTable TablaMostrarOcupacion;
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton regreso2;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,13 +4,12 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import BO.ClientesBO;
-import Entity.Categorias;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import proyectolenguajes.ConexionBD;
 
 /**
  *
@@ -18,14 +17,73 @@ import java.sql.SQLException;
  */
 public class ListarempleadoView extends javax.swing.JFrame {
 
-
-    
-    
-   
-
     public ListarempleadoView() {
         initComponents();
+        // Asocia el ActionListener al botón
+        Mostrar_el_empleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mostrar_el_empleadoActionPerformed(evt);
+            }
+        });
     }
+
+    private void Mostrar_el_empleadoActionPerformed(java.awt.event.ActionEvent evt) {
+    ConexionBD conexionBD = new ConexionBD();
+    Connection conn = null;
+    Statement stmt = null;
+    ResultSet rs = null;
+    try {
+        conn = conexionBD.conectar();
+        if (conn != null) {
+            String query = "SELECT ID_EMPLEADO, ID_OCUPACION, NOMBRE_EMPLEADO, APELLIDO, TELEFONO, SALARIO FROM EMPLEADOS";
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+
+            // Crear un modelo de tabla y asignarlo a la JTable
+            javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(
+                new Object [][] {},
+                new String [] {"ID", "OCUPACION", "NOMBRE", "APELLIDO", "CELULAR", "SALARIO"}
+            );
+
+            // Añadir filas al modelo de tabla
+            while (rs.next()) {
+                int id = rs.getInt("ID_EMPLEADO");
+                int ocupacion = rs.getInt("ID_OCUPACION");
+                String nombre = rs.getString("NOMBRE_EMPLEADO");
+                String apellido = rs.getString("APELLIDO");
+                String telefono = rs.getString("TELEFONO");
+                double salario = rs.getDouble("SALARIO");
+
+                model.addRow(new Object[]{id, ocupacion, nombre, apellido, telefono, salario});
+            }
+
+            // Asignar el modelo a la tabla
+            TablaMostrarEmpleados.setModel(model);
+        } else {
+            JOptionPane.showMessageDialog(this, "Conexión fallida", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error de SQL: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+    } finally {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        conexionBD.cerrarConexion(conn);
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,9 +97,10 @@ public class ListarempleadoView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        TablaMostrarEmpleados = new javax.swing.JTable();
+        Mostrar_el_empleado = new javax.swing.JButton();
         regreso3 = new javax.swing.JButton();
+        Limpiar_datos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,20 +110,46 @@ public class ListarempleadoView extends javax.swing.JFrame {
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaMostrarEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "OCUPACION", "NOMBRE", "APELLIDO", "CELULAR", "SALARIO"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaMostrarEmpleados);
 
-        jButton1.setText("jButton1");
+        Mostrar_el_empleado.setText("Mostar datos");
 
         regreso3.setText("Regresar");
         regreso3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,32 +158,48 @@ public class ListarempleadoView extends javax.swing.JFrame {
             }
         });
 
+        Limpiar_datos.setText("LIMPIAR DATOS");
+        Limpiar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Limpiar_datosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(regreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 56, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Mostrar_el_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(Limpiar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)))
+                        .addComponent(regreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(regreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(regreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Limpiar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Mostrar_el_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,8 +219,12 @@ public class ListarempleadoView extends javax.swing.JFrame {
     private void regreso3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso3MouseClicked
         dispose();
     }//GEN-LAST:event_regreso3MouseClicked
-  
-   
+
+    private void Limpiar_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Limpiar_datosActionPerformed
+      javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TablaMostrarEmpleados.getModel();
+      model.setRowCount(0);
+    }//GEN-LAST:event_Limpiar_datosActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -160,11 +265,12 @@ public class ListarempleadoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Limpiar_datos;
+    private javax.swing.JButton Mostrar_el_empleado;
+    private javax.swing.JTable TablaMostrarEmpleados;
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton regreso3;
     // End of variables declaration//GEN-END:variables
 }

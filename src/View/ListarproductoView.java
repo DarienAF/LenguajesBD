@@ -1,30 +1,99 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package View;
 
-import BO.CategoriasBO;
-import BO.ClientesBO;
-import Entity.Categorias;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import proyectolenguajes.ConexionBD;
 
-/**
- *
- * @author barah
- */
 public class ListarproductoView extends javax.swing.JFrame {
-
-
-    
-    
-   
 
     public ListarproductoView() {
         initComponents();
+        Mostrar_datos.setText("Mostrar datos");
+        Mostrar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Mostrar_datosActionPerformed(evt);
+            }
+        });
+
+        Limpiar_datos.setText("Limpiar datos");
+        Limpiar_datos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarDatosActionPerformed(evt);
+            }
+        });
+    }
+
+    private void LimpiarDatosActionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtener el modelo de la tabla
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) MostrarProducto.getModel();
+        model.setRowCount(0); // Limpiar todas las filas
+    }
+
+    private void Mostrar_datosActionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtener el modelo de la tabla
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) MostrarProducto.getModel();
+        model.setRowCount(0); // Limpiar el modelo de la tabla antes de agregar nuevos datos
+
+        // Configurar conexión y consulta
+        ConexionBD conexionBD = new ConexionBD();
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = conexionBD.conectar();
+            if (conn != null) {
+                System.out.println("Conexión establecida correctamente.");
+                String query = "SELECT ID_PRODUCTO, ID_CATEGORIA, ID_PROVEEDOR, NOMBRE_PRODUCTO, INVENTARIO, PRECIO_VENTA, PRECIO_COMPRA FROM PROYECTOADMIN.PRODUCTOS";
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(query);
+
+                // Verificar si el ResultSet tiene datos y llenar la tabla
+                boolean hasData = false;
+                while (rs.next()) {
+                    hasData = true;
+                    int idProducto = rs.getInt("ID_PRODUCTO");
+                    int idCategoria = rs.getInt("ID_CATEGORIA");
+                    int idProveedor = rs.getInt("ID_PROVEEDOR");
+                    String nombreProducto = rs.getString("NOMBRE_PRODUCTO");
+                    int inventario = rs.getInt("INVENTARIO");
+                    double precioVenta = rs.getDouble("PRECIO_VENTA");
+                    double precioCompra = rs.getDouble("PRECIO_COMPRA");
+
+                    model.addRow(new Object[]{idProducto, idCategoria, idProveedor, nombreProducto, inventario, precioVenta, precioCompra});
+                }
+
+                if (!hasData) {
+                    System.out.println("El ResultSet está vacío.");
+                } else {
+                    System.out.println("Número de filas en el modelo: " + model.getRowCount());
+                }
+            } else {
+                System.out.println("Conexión fallida.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error de SQL: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } finally {
+            // Cerrar ResultSet, Statement y Connection
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            conexionBD.cerrarConexion(conn);
+        }
     }
 
     /**
@@ -38,10 +107,11 @@ public class ListarproductoView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
+        Mostrar_datos = new javax.swing.JButton();
+        Limpiar_datos = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        MostrarProducto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,58 +121,84 @@ public class ListarproductoView extends javax.swing.JFrame {
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton1.setText("jButton1");
-
         regreso2.setText("Regresar");
         regreso2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 regreso2MouseClicked(evt);
             }
         });
+        regreso2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regreso2ActionPerformed(evt);
+            }
+        });
+
+        Mostrar_datos.setText("Mostrar datos");
+
+        Limpiar_datos.setText("Limpiar datos");
+
+        MostrarProducto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "IdProducto", "IdCategoria", "IdProveedor", "NombreProducto", "CantidadInventario", "PrecioVenta", "Title 7"
+            }
+        ));
+        jScrollPane2.setViewportView(MostrarProducto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(81, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(496, 496, 496)
+                            .addComponent(Mostrar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(82, 82, 82)
+                            .addComponent(Limpiar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(554, 554, 554))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Limpiar_datos, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                    .addComponent(Mostrar_datos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(regreso2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,11 +215,14 @@ public class ListarproductoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void regreso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regreso2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regreso2ActionPerformed
+
     private void regreso2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso2MouseClicked
         dispose();
     }//GEN-LAST:event_regreso2MouseClicked
-  
-   
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -188,11 +287,12 @@ public class ListarproductoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Limpiar_datos;
+    private javax.swing.JTable MostrarProducto;
+    private javax.swing.JButton Mostrar_datos;
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton regreso2;
     // End of variables declaration//GEN-END:variables
 }
