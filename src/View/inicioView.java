@@ -178,6 +178,11 @@ public class inicioView extends javax.swing.JFrame {
                 ListarCategoriasMouseClicked(evt);
             }
         });
+        ListarCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarCategoriasActionPerformed(evt);
+            }
+        });
         CategoriasMenu.add(ListarCategorias);
 
         jMenuBar1.add(CategoriasMenu);
@@ -227,6 +232,11 @@ public class inicioView extends javax.swing.JFrame {
         ListarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ListarClientesMouseClicked(evt);
+            }
+        });
+        ListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarClientesActionPerformed(evt);
             }
         });
         ClientesMenu.add(ListarClientes);
@@ -838,6 +848,16 @@ public class inicioView extends javax.swing.JFrame {
         ListarventasView Lven = new ListarventasView();
         Lven.setVisible(true);
     }//GEN-LAST:event_ListarVentaActionPerformed
+
+    private void ListarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCategoriasActionPerformed
+        ListarcategoriaView Lcat = new ListarcategoriaView();
+        Lcat.setVisible(true);
+    }//GEN-LAST:event_ListarCategoriasActionPerformed
+
+    private void ListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarClientesActionPerformed
+        ListarclienteView Lcl = new ListarclienteView();
+        Lcl.setVisible(true);
+    }//GEN-LAST:event_ListarClientesActionPerformed
 
     /**
      * @param args the command line arguments

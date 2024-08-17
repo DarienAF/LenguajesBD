@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class ConexionBD {
     private final String driver = "oracle.jdbc.OracleDriver"; // Actualiza si es necesario
-    private final String url = "jdbc:oracle:thin:@192.168.1.87:1521:ORCL";
+    private final String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
     private final String user = "proyectoadmin";
     private final String pass = "123";
 
