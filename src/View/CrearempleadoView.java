@@ -166,7 +166,7 @@ public class CrearempleadoView extends javax.swing.JFrame {
     private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
          try {
             // Verifica que todos los campos estén llenos
-            if (txtNombre.getText().isEmpty() || labelBG.getText().isEmpty() ||
+            if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() ||
                 txtTelefono.getText().isEmpty() || txtSalario.getText().isEmpty() || 
                 txtIdOcupacion.getText().isEmpty()) {
                 
@@ -176,7 +176,7 @@ public class CrearempleadoView extends javax.swing.JFrame {
                 // Crea una nueva instancia de Empleados y establece sus atributos
                 Empleados emp = new Empleados();
                 emp.setNombre_empleado(txtNombre.getText());
-                emp.setApellido(labelBG.getText());
+                emp.setApellido(txtApellido.getText());
                 emp.setTelefono(txtTelefono.getText());
                 emp.setSalario(Integer.parseInt(txtSalario.getText()));
                 emp.setId_ocupacion(Integer.parseInt(txtIdOcupacion.getText())); // Establece el id_ocupacion
@@ -187,7 +187,7 @@ public class CrearempleadoView extends javax.swing.JFrame {
                 
                 // Limpia los campos después de la creación
                 txtNombre.setText("");
-                labelBG.setText("");
+                txtApellido.setText("");
                 txtTelefono.setText("");
                 txtSalario.setText("");
                 txtIdOcupacion.setText(""); // Limpia el campo id_ocupacion

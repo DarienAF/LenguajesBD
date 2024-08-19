@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class ModificarempleadoView extends javax.swing.JFrame {
 
     EmpleadosBO empleado = new EmpleadosBO(); 
+    
     public ModificarempleadoView() {
         initComponents();
     }

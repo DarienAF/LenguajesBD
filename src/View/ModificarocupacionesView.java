@@ -4,19 +4,25 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import Entity.Categorias;
-import java.lang.System.Logger;
+//Importes escenciales
+import BO.OcupacionesBO;
+import Entity.Ocupaciones;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author barah
- */
+//Inicio JFRAME
 public class ModificarocupacionesView extends javax.swing.JFrame {
-
-    CategoriasBO cat = new CategoriasBO(); 
+    //Instancia de BO (Business Object) para usar sus metodos CRUD
+    OcupacionesBO ocupacion = new OcupacionesBO(); 
+    
+    //Metodo custom para llamar de BO el metodo de listar tabla
+    public void listarOcupaciones() throws SQLException{
+        ocupacion.listarOcupaciones(jTable2);
+    }
+    
+    //Iniciacios automarica de componentes Jframe
     public ModificarocupacionesView() {
         initComponents();
     }
@@ -36,8 +42,15 @@ public class ModificarocupacionesView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonVerDatos = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtOcupacionId = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jButtonModificar = new javax.swing.JButton();
         jLabelBG = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -66,21 +79,26 @@ public class ModificarocupacionesView extends javax.swing.JFrame {
         jTable2.setBackground(new java.awt.Color(255, 255, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Ocupacion", "Denominacion", "Cantidad Empleados"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 317, 667, 137));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 283, -1, -1));
+        jButtonVerDatos.setText("Ver Datos");
+        jButtonVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerDatosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 283, -1, -1));
 
         regreso2.setText("Regresar");
         regreso2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -89,6 +107,29 @@ public class ModificarocupacionesView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(regreso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(601, 472, 95, 39));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Ingrese el ID de la ocupacion a modificar");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanel1.add(txtOcupacionId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 80, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Re ingrese la denominacion");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 140, -1));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Re ingrese la cantidad de empleados");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, -1));
 
         jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
         jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 740, 530));
@@ -110,6 +151,46 @@ public class ModificarocupacionesView extends javax.swing.JFrame {
     private void regreso2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso2MouseClicked
         dispose();
     }//GEN-LAST:event_regreso2MouseClicked
+
+    private void jButtonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerDatosActionPerformed
+        try {
+            listarOcupaciones();
+        } catch (SQLException ex) {
+             Logger.getLogger(ModificarocupacionesView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonVerDatosActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        try{
+        // Verifica si los campos necesarios están vacíos
+        if(txtOcupacionId.getText().isEmpty() || txtNombre.getText().isEmpty()
+           || txtCantidad.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos para poder modificar la ocupación");
+        } else {
+            //Crear una instancia de Ocupacioens Entity y establece sus atributos
+            Ocupaciones ocup = new Ocupaciones();
+            try{
+                ocup.setId_ocupacion(Integer.parseInt(txtOcupacionId.getText())); 
+                ocup.setNombre_ocupacion(txtNombre.getText());
+                ocup.setCantidad_empleados(Integer.parseInt(txtCantidad.getText()));
+           
+                String mensaje = ocupacion.modificarOcupacion(ocup);               
+                JOptionPane.showMessageDialog(null, mensaje);
+                 
+                 txtOcupacionId.setText("");
+                 txtNombre.setText("");
+                 txtCantidad.setText("");
+                 
+        } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "El ID Ocupacion y Cantidad empleados deben ser números válidos");
+                }
+            }
+        } catch (Exception e) {
+            // Manejo genérico de excepciones
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al modificar la ocupación: " + e.getMessage());
+            Logger.getLogger(ModificarocupacionesView.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -163,7 +244,11 @@ public class ModificarocupacionesView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonVerDatos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -171,5 +256,8 @@ public class ModificarocupacionesView extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JButton regreso2;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtOcupacionId;
     // End of variables declaration//GEN-END:variables
 }

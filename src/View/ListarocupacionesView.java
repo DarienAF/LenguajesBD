@@ -4,95 +4,26 @@
  */
 package View;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import proyectolenguajes.ConexionBD;
 
-/**
- *
- * @author barah
- */
+import BO.OcupacionesBO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.sql.SQLException;
+
+
 public class ListarocupacionesView extends javax.swing.JFrame {
+    
+    OcupacionesBO ocupacion = new OcupacionesBO();
+    
+    public void listarOcupaciones()throws SQLException{
+        ocupacion.listarOcupaciones(jTable1);
+    }
 
     public ListarocupacionesView() {
         initComponents();
-        Mostrar_datos.setText("Mostrar datos");
-        Mostrar_datos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mostrar_el_empleadoActionPerformed(evt);
-            }
-        });
-
-        // Agregar ActionListener para el botón Limpiar_datos
-        Limpiar_datos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Limpiar_datosActionPerformed(evt);
-            }
-        });
+      
     }
-
-    private void Limpiar_datosActionPerformed(java.awt.event.ActionEvent evt) {
-        // Obtener el modelo de la tabla
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TablaMostrarOcupacion.getModel();
-        model.setRowCount(0); // Limpiar todas las filas
-    }
-
-    private void Mostrar_el_empleadoActionPerformed(java.awt.event.ActionEvent evt) {
-        // Limpiar la tabla antes de mostrar nuevos datos
-        Limpiar_datosActionPerformed(evt);
-
-        ConexionBD conexionBD = new ConexionBD();
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = (Connection) conexionBD.conectar();
-            if (conn != null) {
-                String query = "SELECT ID_OCUPACION, NOMBRE_OCUPACION, CANTIDAD_EMPLEADOS FROM OCUPACIONES";
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery(query);
-
-                // Obtener el modelo de la tabla
-                javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TablaMostrarOcupacion.getModel();
-
-                // Llenar la tabla con los datos
-                while (rs.next()) {
-                    int id = rs.getInt("ID_OCUPACION");
-                    String nombre = rs.getString("NOMBRE_OCUPACION");
-                    int cantidad = rs.getInt("CANTIDAD_EMPLEADOS");
-
-                    model.addRow(new Object[]{id, nombre, cantidad});
-                }
-            } else {
-                System.out.println("Conexión fallida");
-            }
-        } catch (SQLException e) {
-            System.err.println("Error de SQL: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Cerrar ResultSet, Statement y Connection
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            conexionBD.cerrarConexion((java.sql.Connection) conn);
-        }
-    }
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +36,7 @@ public class ListarocupacionesView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaMostrarOcupacion = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         Mostrar_datos = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
         Limpiar_datos = new javax.swing.JButton();
@@ -121,8 +52,8 @@ public class ListarocupacionesView extends javax.swing.JFrame {
         Titulo.setText("UNDER FIRE");
         jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 581, 47));
 
-        TablaMostrarOcupacion.setBackground(new java.awt.Color(255, 255, 255));
-        TablaMostrarOcupacion.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setBackground(new java.awt.Color(255, 255, 255));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -149,7 +80,7 @@ public class ListarocupacionesView extends javax.swing.JFrame {
                 "ID_OCUPACION", "NOMBRE", "CANTIDAD_EMPLEADOS"
             }
         ));
-        jScrollPane1.setViewportView(TablaMostrarOcupacion);
+        jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 696, 350));
 
@@ -194,7 +125,11 @@ public class ListarocupacionesView extends javax.swing.JFrame {
     }//GEN-LAST:event_regreso2MouseClicked
 
     private void Mostrar_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mostrar_datosActionPerformed
-        // TODO add your handling code here:
+        try {
+            listarOcupaciones();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarocupacionesView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Mostrar_datosActionPerformed
 
     public static void main(String args[]) {
@@ -247,11 +182,11 @@ public class ListarocupacionesView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Limpiar_datos;
     private javax.swing.JButton Mostrar_datos;
-    private javax.swing.JTable TablaMostrarOcupacion;
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton regreso2;
     // End of variables declaration//GEN-END:variables
 }

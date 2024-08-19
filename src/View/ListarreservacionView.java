@@ -4,19 +4,12 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import BO.ClientesBO;
+
 import BO.ReservacionesBO;
-import Entity.Categorias;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import java.sql.SQLException;
 
-/**
- *
- * @author barah
- */
 public class ListarreservacionView extends javax.swing.JFrame {
     
     ReservacionesBO reserv = new ReservacionesBO();
