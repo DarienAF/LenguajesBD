@@ -4,29 +4,25 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import BO.ClientesBO;
-import Entity.Categorias;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import BO.ServiciosBO;
+import Entity.Servicios;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author barah
- */
 public class CrearserviciosView extends javax.swing.JFrame {
 
-    
-    
-    
-   
+     ServiciosBO serviciosBO = new ServiciosBO(); 
 
     public CrearserviciosView() {
         initComponents();
     }
 
+    /*METODO CUSTOM PARA LLAMAR DESDE BO Y LISTAR EN LA TABLA*/
+    public void listarServicios() throws SQLException{
+       serviciosBO.listarServicios(jTable1);
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,8 +36,13 @@ public class CrearserviciosView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonVerDatos = new javax.swing.JButton();
         regreso3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtServicio = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtMonto = new javax.swing.JTextField();
+        jButtonCrear = new javax.swing.JButton();
         jLabelBG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,21 +58,26 @@ public class CrearserviciosView extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Servicio", "Servicio", "Monto"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 325, 649, 121));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 291, -1, -1));
+        jButtonVerDatos.setText("Ver Datos");
+        jButtonVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerDatosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 291, -1, -1));
 
         regreso3.setText("Regresar");
         regreso3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,6 +86,24 @@ public class CrearserviciosView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(regreso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 458, 95, 39));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Servicio");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel1.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 150, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Monto");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+        jPanel1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 150, -1));
+
+        jButtonCrear.setText("Ingresar");
+        jButtonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
         jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
         jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 740, 520));
@@ -101,6 +125,46 @@ public class CrearserviciosView extends javax.swing.JFrame {
     private void regreso3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso3MouseClicked
         dispose();
     }//GEN-LAST:event_regreso3MouseClicked
+
+    private void jButtonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearActionPerformed
+        try {
+            // Verifica si los campos necesarios están vacíos
+            if (txtServicio.getText().isEmpty() || txtMonto.getText().isEmpty()) {
+                
+                JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos para crear el servicio");
+            } else {
+                // Crea una nueva instancia de Servicios y establece sus atributos
+                Servicios servicio = new Servicios();
+                try {
+                    servicio.setServicio(txtServicio.getText());
+                    servicio.setMonto(Integer.parseInt(txtMonto.getText())); // Conversión de texto a entero
+
+                    // Llama al método para crear el servicio y muestra el mensaje resultante
+                    String mensaje = serviciosBO.crearServicios(servicio);
+                    JOptionPane.showMessageDialog(null, mensaje);
+
+                    // Limpia los campos después de la creación
+                    txtServicio.setText("");
+                    txtMonto.setText("");
+                    
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "El monto debe ser un número válido");
+                }
+            }
+        } catch (Exception e) {
+            // Manejo genérico de excepciones
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al crear el servicio: " + e.getMessage());
+            Logger.getLogger(CrearserviciosView.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_jButtonCrearActionPerformed
+
+    private void jButtonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerDatosActionPerformed
+        try {
+            listarServicios();
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearserviciosView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonVerDatosActionPerformed
  
    
     public static void main(String args[]) {
@@ -200,11 +264,16 @@ public class CrearserviciosView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonCrear;
+    private javax.swing.JButton jButtonVerDatos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton regreso3;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtServicio;
     // End of variables declaration//GEN-END:variables
 }

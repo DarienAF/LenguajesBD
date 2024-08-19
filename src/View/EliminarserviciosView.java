@@ -4,23 +4,25 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import java.sql.SQLException;
-import java.util.logging.Level;
+import BO.ServiciosBO;
 import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author barah
- */
+
 public class EliminarserviciosView extends javax.swing.JFrame {
 
-    CategoriasBO cat = new CategoriasBO();
+    ServiciosBO serviciosBO = new ServiciosBO();
+    
     public EliminarserviciosView() {
         initComponents();
     }
 
+    /*METODO CUSTOM PARA LLAMAR DESDE BO Y LISTAR EN LA TABLA*/
+    public void listarServicios() throws SQLException{
+       serviciosBO.listarServicios(jTable1);
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,8 +36,11 @@ public class EliminarserviciosView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonVerDatos = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        jButtonEliminar = new javax.swing.JButton();
         jLabelBG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,21 +57,21 @@ public class EliminarserviciosView extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Servicios", "Servicio", "Monto"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 278, 603, 151));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(589, 250, -1, -1));
+        jButtonVerDatos.setText("Ver Datos");
+        jPanel1.add(jButtonVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(589, 250, -1, -1));
 
         regreso2.setText("Regresar");
         regreso2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,6 +80,19 @@ public class EliminarserviciosView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(regreso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 435, 95, 39));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Ingrese el ID del Servicio a Eliminar");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 120, -1));
+
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
         jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 730, 490));
@@ -96,6 +114,22 @@ public class EliminarserviciosView extends javax.swing.JFrame {
     private void regreso2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso2MouseClicked
         dispose();
     }//GEN-LAST:event_regreso2MouseClicked
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        try {
+            if (txtId.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un ID para poder eliminar");
+                
+            }else{
+                int idEliminar = Integer.parseInt(txtId.getText());
+                String mensaje = serviciosBO.eliminarServicios(idEliminar);
+                JOptionPane.showMessageDialog(null, mensaje);
+                
+                txtId.setText("");
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1157,11 +1191,14 @@ public class EliminarserviciosView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonVerDatos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton regreso2;
+    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }
