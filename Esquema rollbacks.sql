@@ -429,47 +429,42 @@ EXCEPTION
 END;
 
 /* -----------------PRODUCTOS-----------------*/
-    --create
     CREATE OR REPLACE PROCEDURE sp_insertar_producto (
     p_id_categoria IN NUMBER,
     p_id_proveedor IN NUMBER,
     p_nombre_producto IN VARCHAR2,
-    p_inventario IN NUMBER
+    p_inventario IN NUMBER,
+    p_precio_venta IN NUMBER,
+    p_precio_compra IN NUMBER
 ) AS
 BEGIN
-    INSERT INTO Productos (id_categoria, id_proveedor, nombre_producto, inventario)
-    VALUES (p_id_categoria, p_id_proveedor, p_nombre_producto, p_inventario);
+    INSERT INTO Productos (id_categoria, id_proveedor, nombre_producto, inventario, precio_venta, precio_compra)
+    VALUES (p_id_categoria, p_id_proveedor, p_nombre_producto, p_inventario, p_precio_venta, p_precio_compra);
     COMMIT;
 EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
         RAISE_APPLICATION_ERROR(-20001, 'Error al insertar en la tabla Productos: ' || SQLERRM);
 END;
+/
 
-    --read
-CREATE OR REPLACE PROCEDURE sp_listar_productos (
-    p_productos OUT SYS_REFCURSOR
-) AS
-BEGIN
-    OPEN p_productos FOR
-    SELECT id_producto, id_categoria, id_proveedor, nombre_producto, inventario
-    FROM Productos;
-END;
-
-    --update
 CREATE OR REPLACE PROCEDURE sp_actualizar_producto (
     p_id_producto IN NUMBER,
     p_id_categoria IN NUMBER,
     p_id_proveedor IN NUMBER,
     p_nombre_producto IN VARCHAR2,
-    p_inventario IN NUMBER
+    p_inventario IN NUMBER,
+    p_precio_venta IN NUMBER,
+    p_precio_compra IN NUMBER
 ) AS
 BEGIN
     UPDATE Productos
     SET id_categoria = p_id_categoria,
         id_proveedor = p_id_proveedor,
         nombre_producto = p_nombre_producto,
-        inventario = p_inventario
+        inventario = p_inventario,
+        precio_venta = p_precio_venta,
+        precio_compra = p_precio_compra
     WHERE id_producto = p_id_producto;
     COMMIT;
 EXCEPTION
@@ -477,6 +472,19 @@ EXCEPTION
         ROLLBACK;
         RAISE_APPLICATION_ERROR(-20002, 'Error al actualizar en la tabla Productos: ' || SQLERRM);
 END;
+/
+
+CREATE OR REPLACE PROCEDURE sp_listar_productos (
+    p_productos OUT SYS_REFCURSOR
+) AS
+BEGIN
+    OPEN p_productos FOR
+    SELECT id_producto, id_categoria, id_proveedor, nombre_producto, inventario, precio_venta, precio_compra
+    FROM Productos;
+END;
+/
+
+COMMIT;
 
     --delete
 CREATE OR REPLACE PROCEDURE sp_eliminar_producto (
