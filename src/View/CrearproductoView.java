@@ -4,24 +4,23 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import BO.ClientesBO;
-import Entity.Categorias;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//Importes escenciales
+import BO.ProductosBO;
+import Entity.Productos;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author barah
- */
+//Inicio predefinido de Jframe
 public class CrearproductoView extends javax.swing.JFrame {
-
-    CategoriasBO cat = new CategoriasBO();
+//INSTANCIA DE CLASE QUE MANEJE LA LOGICA DE NEGOCIO (BO)
+    ProductosBO productosBO = new ProductosBO(); 
     
-    
-   
+   /*METODO CUSTOM PARA LLAMAR DESDE BO Y LISTAR EN LA TABLA*/
+    public void listarProductos() throws SQLException{
+       productosBO.listarProductos(jTable1);
+   }
 
     public CrearproductoView() {
         initComponents();
@@ -40,8 +39,21 @@ public class CrearproductoView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonVerDatos = new javax.swing.JButton();
         regreso3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtNombreProducto = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtInventario = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtIdCategoria = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtIdProveedor = new javax.swing.JTextField();
+        jButtonInsertar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtPrecioVenta = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtPrecioCompra = new javax.swing.JTextField();
         jLabelBG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,21 +69,26 @@ public class CrearproductoView extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Producto", "Nombre", "Cantidad ", "ID Categoria", "ID Proveedor", "Precio Venta", "Precio Compra"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 325, 649, 121));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 291, -1, -1));
+        jButtonVerDatos.setText("Ver Datos");
+        jButtonVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerDatosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 291, -1, -1));
 
         regreso3.setText("Regresar");
         regreso3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,6 +97,68 @@ public class CrearproductoView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(regreso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(596, 458, 95, 39));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Nombre del Producto");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 140, -1));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Inventario");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        txtInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInventarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 140, -1));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("ID Categoria");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+
+        txtIdCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCategoriaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtIdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 100, -1));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("ID Proveedor");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
+        jPanel1.add(txtIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 100, -1));
+
+        jButtonInsertar.setText("Ingresar");
+        jButtonInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInsertarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Precio Venta");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
+
+        txtPrecioVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioVentaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 140, -1));
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Precio Compra");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
+
+        txtPrecioCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioCompraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 140, -1));
 
         jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
         jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 740, 520));
@@ -101,6 +180,76 @@ public class CrearproductoView extends javax.swing.JFrame {
     private void regreso3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso3MouseClicked
         dispose();
     }//GEN-LAST:event_regreso3MouseClicked
+
+    private void txtInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInventarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInventarioActionPerformed
+
+    private void txtIdCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdCategoriaActionPerformed
+
+    private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
+         try {
+        // Verifica campos 
+        if (txtNombreProducto.getText().isEmpty() ||
+            txtIdCategoria.getText().isEmpty() ||
+            txtIdProveedor.getText().isEmpty() ||
+            txtInventario.getText().isEmpty() ||
+            txtPrecioVenta.getText().isEmpty() || // Nuevo campo
+            txtPrecioCompra.getText().isEmpty()) { // Nuevo campo
+            
+            JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos para crear el producto");
+        } else {
+            // Crea una nueva instancia de Productos y establece sus atributos
+            Productos producto = new Productos();
+            try {
+                producto.setNombreProducto(txtNombreProducto.getText());
+                producto.setIdCategoria(Integer.parseInt(txtIdCategoria.getText())); 
+                producto.setIdProveedor(Integer.parseInt(txtIdProveedor.getText()));
+                producto.setInventario(Integer.parseInt(txtInventario.getText())); 
+                producto.setPrecioVenta(Double.parseDouble(txtPrecioVenta.getText())); // Nuevo campo
+                producto.setPrecioCompra(Double.parseDouble(txtPrecioCompra.getText())); // Nuevo campo
+
+                // Llama al método para crear el producto y muestra el mensaje resultante
+                ProductosBO productosBO = new ProductosBO();
+                String mensaje = productosBO.crearProductos(producto);
+                JOptionPane.showMessageDialog(null, mensaje);
+
+                // Limpia los campos después de la creación
+                txtNombreProducto.setText("");
+                txtIdCategoria.setText("");
+                txtIdProveedor.setText("");
+                txtInventario.setText("");
+                txtPrecioVenta.setText(""); // Nuevo campo
+                txtPrecioCompra.setText(""); // Nuevo campo
+                
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Todos los IDs y cantidades deben ser números válidos");
+            }
+        }
+    } catch (Exception e) {
+        // Manejo genérico de excepciones
+        JOptionPane.showMessageDialog(null, "Ocurrió un error al crear el producto: " + e.getMessage());
+        Logger.getLogger(CrearproductoView.class.getName()).log(Level.SEVERE, null, e);
+    }
+    }//GEN-LAST:event_jButtonInsertarActionPerformed
+
+    private void jButtonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerDatosActionPerformed
+         try {
+            listarProductos();
+        } catch (SQLException ex) {
+            Logger.getLogger(CrearproductoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonVerDatosActionPerformed
+
+    private void txtPrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioVentaActionPerformed
+
+    private void txtPrecioCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioCompraActionPerformed
  
    
     public static void main(String args[]) {
@@ -144,11 +293,24 @@ public class CrearproductoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonInsertar;
+    private javax.swing.JButton jButtonVerDatos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton regreso3;
+    private javax.swing.JTextField txtIdCategoria;
+    private javax.swing.JTextField txtIdProveedor;
+    private javax.swing.JTextField txtInventario;
+    private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtPrecioCompra;
+    private javax.swing.JTextField txtPrecioVenta;
     // End of variables declaration//GEN-END:variables
 }

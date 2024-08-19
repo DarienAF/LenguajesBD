@@ -31,9 +31,9 @@ public class ServiciosDAO {
         try {
             cst = conn.prepareCall(procedureCall);
 
+            cst.setInt(1, servicio.getMonto());
             cst.setString(2, servicio.getServicio());
-            cst.setInt(3, servicio.getMonto());
-
+           
             respuesta = "Servicio registrado correctamente";
             cst.execute();
             cst.close();
@@ -61,8 +61,9 @@ public class ServiciosDAO {
             cst = conn.prepareCall(procedureCall);
 
             cst.setInt(1, servicio.getIdServicio());
-            cst.setString(2, servicio.getServicio());
-            cst.setInt(3, servicio.getMonto());
+            cst.setInt(2, servicio.getMonto());
+            
+            cst.setString(3, servicio.getServicio());
 
             respuesta = "Servicio modificado correctamente";
             cst.execute();
@@ -111,28 +112,28 @@ public class ServiciosDAO {
     /* --------- METODO PARA LISTAR SERVICIOS ---------- */
     public void listarServicios(Connection conn, JTable tabla) {
         DefaultTableModel model;
-        String[] columnas = {"ID Servicio", "Servicio", "Monto"};
-        model = new DefaultTableModel(null, columnas);
+        String[] columnas = {"ID Servicio", "Monto", "Servicio"};
+     model = new DefaultTableModel(null, columnas);
 
-        CallableStatement cst = null;
-        ResultSet rs = null;
+     CallableStatement cst = null;
+     ResultSet rs = null;
 
-        try {
-            cst = conn.prepareCall("{call sp_listar_servicios(?)}");
-            cst.registerOutParameter(1, Types.REF_CURSOR);
-            cst.execute();
+     try {
+         cst = conn.prepareCall("{call sp_listar_servicios(?)}");
+         cst.registerOutParameter(1, Types.REF_CURSOR);
+         cst.execute();
 
-            rs = (ResultSet) cst.getObject(1);
+         rs = (ResultSet) cst.getObject(1);
 
-            while (rs.next()) {
-                int idServicio = rs.getInt("ID_SERVICIO");
-                String nombreServicio = rs.getString("SERVICIO");
-                int monto = rs.getInt("MONTO");
+         while (rs.next()) {
+             int idServicio = rs.getInt("id_servicio");
+             double monto = rs.getDouble("monto_s");
+             String servicio = rs.getString("servicio");
 
-                model.addRow(new Object[]{idServicio, nombreServicio, monto});
-            }
+             model.addRow(new Object[]{idServicio, monto, servicio});
+         }
 
-            tabla.setModel(model);
+         tabla.setModel(model);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo listar los servicios\nError: " + e.getMessage());

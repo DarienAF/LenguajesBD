@@ -1,14 +1,30 @@
-
 package Entity;
 
 public class Productos {
     private int idProducto;
     private String nombreProducto;
-    private int cantidadInventario;
     private int idCategoria;
     private int idProveedor;
     private int inventario;
-    
+    private double precioVenta;
+    private double precioCompra;
+
+    // Constructor por defecto
+    public Productos() {
+    }
+
+    // Constructor con parámetros
+    public Productos(int idProducto, String nombreProducto, int idCategoria, int idProveedor, int inventario, double precioVenta, double precioCompra) {
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.idCategoria = idCategoria;
+        this.idProveedor = idProveedor;
+        this.inventario = inventario;
+        this.precioVenta = precioVenta;
+        this.precioCompra = precioCompra;
+    }
+
+    // Getters y Setters
 
     public int getIdProducto() {
         return idProducto;
@@ -26,14 +42,6 @@ public class Productos {
         this.nombreProducto = nombreProducto;
     }
 
-    public int getCantidadInventario() {
-        return cantidadInventario;
-    }
-
-    public void setCantidadInventario(int cantidadInventario) {
-        this.cantidadInventario = cantidadInventario;
-    }
-
     public int getIdCategoria() {
         return idCategoria;
     }
@@ -41,7 +49,6 @@ public class Productos {
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
-
 
     public int getIdProveedor() {
         return idProveedor;
@@ -59,16 +66,23 @@ public class Productos {
         this.inventario = inventario;
     }
 
-    public Productos(int idProducto, String nombreProducto, int cantidadInventario, int idCategoria, int idProveedor, int inventario) {
-        this.idProducto = idProducto;
-        this.nombreProducto = nombreProducto;
-        this.cantidadInventario = cantidadInventario;
-        this.idCategoria = idCategoria;
-        this.idProveedor = idProveedor;
-        this.inventario = inventario;
+    public double getPrecioVenta() {
+        return precioVenta;
     }
 
-    public Productos() {
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
+    public double getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(double precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+    
 }
+
+
+

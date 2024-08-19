@@ -32,6 +32,7 @@ public class inicioView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cerrar = new javax.swing.JButton();
+        jLabelLogo = new javax.swing.JLabel();
         jLabelBG = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         CategoriasMenu = new javax.swing.JMenu();
@@ -88,12 +89,12 @@ public class inicioView extends javax.swing.JFrame {
         Titulo.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
-        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 218, -1, -1));
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Goudy Stout", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 104, 34));
         jLabel1.setText("Paintball");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 290, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, -1));
 
         cerrar.setBackground(new java.awt.Color(153, 104, 34));
         cerrar.setText("Cerrar");
@@ -103,6 +104,10 @@ public class inicioView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(636, 565, 82, 35));
+
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo.jpg"))); // NOI18N
+        jLabelLogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 310, 280));
 
         jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
         jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 750, 600));
@@ -920,6 +925,7 @@ public class inicioView extends javax.swing.JFrame {
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelBG;
+    private javax.swing.JLabel jLabelLogo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem modificarEmp;
