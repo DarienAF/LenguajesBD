@@ -6,6 +6,7 @@ package View;
 
 import BO.CategoriasBO;
 import BO.ClientesBO;
+import BO.VentasBO;
 import Entity.Categorias;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 public class ListarventasView extends javax.swing.JFrame {
 
 
-    
+    VentasBO venta= new VentasBO();
     
    
 
@@ -39,8 +40,8 @@ public class ListarventasView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        TablaVentas = new javax.swing.JTable();
+        verDatos = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,7 +52,7 @@ public class ListarventasView extends javax.swing.JFrame {
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,9 +63,14 @@ public class ListarventasView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TablaVentas);
 
-        jButton1.setText("jButton1");
+        verDatos.setText("Ver Datos");
+        verDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verDatosActionPerformed(evt);
+            }
+        });
 
         regreso2.setText("Regresar");
         regreso2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,7 +93,7 @@ public class ListarventasView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(verDatos)
                     .addComponent(regreso2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
@@ -97,7 +103,7 @@ public class ListarventasView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(verDatos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -122,7 +128,22 @@ public class ListarventasView extends javax.swing.JFrame {
     private void regreso2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso2MouseClicked
         dispose();
     }//GEN-LAST:event_regreso2MouseClicked
+
+    private void verDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verDatosActionPerformed
+        // TODO add your handling code here:
+        try {
+            Listarventas();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarventasView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_verDatosActionPerformed
   
+    public void Listarventas() throws SQLException {
+        
+        venta.listarVentas(TablaVentas);
+        
+    }
+    
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -668,11 +689,11 @@ public class ListarventasView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaVentas;
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton regreso2;
+    private javax.swing.JButton verDatos;
     // End of variables declaration//GEN-END:variables
 }
