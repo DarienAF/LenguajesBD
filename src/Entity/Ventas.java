@@ -8,21 +8,21 @@ public class Ventas {
     private int idProducto;
     private int idCliente;
     private int idServicio;
-    private int Cantidad;
-    private int Total;
-    private LocalDate Fecha;
+    private int cantidad; 
+    private double total; 
+    private LocalDate fecha;
 
     public Ventas() {
     }
 
-    public Ventas(int idVenta, int idProducto, int idCliente, int idServicio, int Cantidad, int Total, LocalDate Fecha) {
+    public Ventas(int idVenta, int idProducto, int idCliente, int idServicio, int cantidad, double total, LocalDate fecha) {
         this.idVenta = idVenta;
         this.idProducto = idProducto;
         this.idCliente = idCliente;
         this.idServicio = idServicio;
-        this.Cantidad = Cantidad;
-        this.Total = Total;
-        this.Fecha = Fecha;
+        this.cantidad = cantidad;
+        this.total = total;
+        this.fecha = fecha;
     }
 
     public int getIdVenta() {
@@ -58,28 +58,28 @@ public class Ventas {
     }
 
     public int getCantidad() {
-        return Cantidad;
+        return cantidad;
     }
 
-    public void setCantidad(int Cantidad) {
-        this.Cantidad = Cantidad;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public int getTotal() {
-        return Total;
+    public double getTotal() {
+        return total;
     }
 
-    public void setTotal(int Total) {
-        this.Total = Total;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public LocalDate getFecha() {
-        return Fecha;
+        return fecha;
     }
 
-    public void setFecha(LocalDate Fecha) {
-        this.Fecha = Fecha;
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
-
-
+    
+    
 }

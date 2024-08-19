@@ -21,27 +21,26 @@ import java.sql.Types;
 import java.time.LocalDate;
 
 public class VentasDAO {
-     private String respuesta;
+    private String respuesta;
 
-    /* --------- METODO PARA CREAR VENTA ---------- */
+    /* --------- MÉTODO PARA CREAR VENTA ---------- */
     public String crearVenta(Connection conn, Ventas venta) {
         CallableStatement cst = null;
 
-         String procedureCall = "{call sp_insertar_venta(?, ?, ?, ?, ?, ?)}"; 
-        // Ajusta el numero de parametros
+        String procedureCall = "{call sp_insertar_venta(?, ?, ?, ?, ?, ?)}"; 
+        // Ajusta el número de parámetros
 
-    try {
-        cst = conn.prepareCall(procedureCall);
+        try {
+            cst = conn.prepareCall(procedureCall);
 
-        // Configura los parametros del procedimiento almacenado
-        cst.setInt(1, venta.getIdProducto());
-        cst.setInt(2, venta.getIdCliente()); // Nuevo atributo
-        cst.setInt(3, venta.getIdServicio()); // Nuevo atributo
-        cst.setInt(4, venta.getCantidad());   // Nuevo atributo
-        cst.setInt(5, venta.getTotal());      // Nuevo atributo
-        cst.setDate(6, java.sql.Date.valueOf(venta.getFecha()));
-        // Convierte LocalDate a SQL Date
-        
+            // Configura los parámetros del procedimiento almacenado
+            cst.setInt(1, venta.getIdProducto());
+            cst.setInt(2, venta.getIdCliente()); 
+            cst.setInt(3, venta.getIdServicio()); 
+            cst.setInt(4, venta.getCantidad());   
+            cst.setDouble(5, venta.getTotal());   
+            cst.setDate(6, java.sql.Date.valueOf(venta.getFecha())); // Convierte LocalDate a SQL Date
+
             respuesta = "Venta registrada correctamente";
             cst.execute();
             cst.close();
@@ -59,23 +58,23 @@ public class VentasDAO {
         return respuesta;
     }
 
-    /* --------- METODO PARA MODIFICAR VENTA ---------- */
+    /* --------- MÉTODO PARA MODIFICAR VENTA ---------- */
     public String modificarVenta(Connection conn, Ventas venta) {
         CallableStatement cst = null;
 
         String procedureCall = "{call sp_actualizar_venta(?, ?, ?, ?, ?, ?, ?)}"; 
 
-    try {
-        cst = conn.prepareCall(procedureCall);
+        try {
+            cst = conn.prepareCall(procedureCall);
 
-        // Configura los parámetros del procedimiento almacenado
-        cst.setInt(1, venta.getIdVenta());
-        cst.setInt(2, venta.getIdProducto());
-        cst.setInt(3, venta.getIdCliente()); 
-        cst.setInt(4, venta.getIdServicio()); 
-        cst.setInt(5, venta.getCantidad());   
-        cst.setInt(6, venta.getTotal());      
-        cst.setDate(7, java.sql.Date.valueOf(venta.getFecha())); // Convierte LocalDate a SQL Date
+            // Configura los parámetros del procedimiento almacenado
+            cst.setInt(1, venta.getIdVenta());
+            cst.setInt(2, venta.getIdProducto());
+            cst.setInt(3, venta.getIdCliente()); 
+            cst.setInt(4, venta.getIdServicio()); 
+            cst.setInt(5, venta.getCantidad());   
+            cst.setDouble(6, venta.getTotal());   
+            cst.setDate(7, java.sql.Date.valueOf(venta.getFecha())); 
 
             respuesta = "Venta modificada correctamente";
             cst.execute();
@@ -93,6 +92,7 @@ public class VentasDAO {
         }
         return respuesta;
     }
+
 
     /* --------- METODO PARA ELIMINAR VENTA ---------- */
     public String eliminarVenta(Connection conn, int idVenta) {
@@ -124,7 +124,7 @@ public class VentasDAO {
     /* --------- METODO PARA LISTAR VENTAS ---------- */
     public void listarVentas(Connection conn, JTable tabla) {
         DefaultTableModel model;
-       String[] columnas = {"ID Venta", "ID Producto", "ID Cliente", "ID Servicio", "Cantidad", "Total", "Fecha"};
+    String[] columnas = {"ID Venta", "ID Producto", "ID Cliente", "ID Servicio", "Cantidad", "Total", "Fecha"};
     model = new DefaultTableModel(null, columnas);
 
     CallableStatement cst = null;
@@ -140,17 +140,17 @@ public class VentasDAO {
         while (rs.next()) {
             int idVenta = rs.getInt("ID_VENTA");
             int idProducto = rs.getInt("ID_PRODUCTO");
-            int idCliente = rs.getInt("ID_CLIENTE"); // Nuevo atributo
-            int idServicio = rs.getInt("ID_SERVICIO"); // Nuevo atributo
-            int cantidad = rs.getInt("CANTIDAD");       // Nuevo atributo
-            int total = rs.getInt("TOTAL");            // Nuevo atributo
+            int idCliente = rs.getInt("ID_CLIENTE"); 
+            int idServicio = rs.getInt("ID_SERVICIO"); 
+            int cantidad = rs.getInt("CANTIDAD");       
+            double total = rs.getDouble("TOTAL");       
             java.sql.Date fechaSql = rs.getDate("FECHA");
             LocalDate fecha = fechaSql.toLocalDate();  // Convierte SQL Date a LocalDate
 
             model.addRow(new Object[]{idVenta, idProducto, idCliente, idServicio, cantidad, total, fecha});
         }
 
-            tabla.setModel(model);
+        tabla.setModel(model);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo listar las ventas\nError: " + e.getMessage());
