@@ -4,28 +4,25 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import BO.ClientesBO;
-import Entity.Categorias;
+import BO.VentasBO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import java.sql.SQLException;
 
-/**
- *
- * @author barah
- */
 public class ListarventasView extends javax.swing.JFrame {
-
-
     
-    
-   
+    VentasBO ventasBO = new VentasBO();
 
     public ListarventasView() {
         initComponents();
     }
+    
+     public void Listarventas() throws SQLException {
+        
+        ventasBO.listarVentas(jTable1);
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,7 +37,7 @@ public class ListarventasView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonVerDatos = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
         jLabelBG = new javax.swing.JLabel();
 
@@ -57,21 +54,26 @@ public class ListarventasView extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Venta", "ID Producto", "ID Cliente", "ID Servicio", "Cantidad", "Total", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 315, 636, 144));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 281, -1, -1));
+        jButtonVerDatos.setText("Ver Datos");
+        jButtonVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerDatosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 281, -1, -1));
 
         regreso2.setText("Regresar");
         regreso2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,6 +103,14 @@ public class ListarventasView extends javax.swing.JFrame {
     private void regreso2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso2MouseClicked
         dispose();
     }//GEN-LAST:event_regreso2MouseClicked
+
+    private void jButtonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerDatosActionPerformed
+        try {
+            Listarventas();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarventasView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonVerDatosActionPerformed
   
    
     public static void main(String args[]) {
@@ -648,7 +658,7 @@ public class ListarventasView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonVerDatos;
     private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

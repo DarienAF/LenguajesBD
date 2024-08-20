@@ -4,23 +4,29 @@
  */
 package View;
 
-import BO.CategoriasBO;
-import Entity.Categorias;
-import java.lang.System.Logger;
+import BO.VentasBO;
+import Entity.Ventas;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author barah
- */
+
 public class ModificarventasView extends javax.swing.JFrame {
 
+    VentasBO ventasBO = new VentasBO();
     
     public ModificarventasView() {
         initComponents();
     }
 
+    public void Listarventas() throws SQLException {
+        
+        ventasBO.listarVentas(jTable2);
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,8 +42,24 @@ public class ModificarventasView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonVerDatos = new javax.swing.JButton();
         regreso2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtIdVenta = new javax.swing.JTextField();
+        txtIdProducto = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtIdCliente = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtIdServicio = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtTotal = new javax.swing.JTextField();
+        jButtonModificar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jLabelBG = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -66,21 +88,26 @@ public class ModificarventasView extends javax.swing.JFrame {
         jTable2.setBackground(new java.awt.Color(255, 255, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID Venta", "ID Producto", "ID Cliente", "ID Servicio", "Cantidad", "Total", "Fecha"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 317, 667, 137));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 283, -1, -1));
+        jButtonVerDatos.setText("Ver Datos");
+        jButtonVerDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVerDatosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 283, -1, -1));
 
         regreso2.setText("Regresar");
         regreso2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -89,6 +116,70 @@ public class ModificarventasView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(regreso2, new org.netbeans.lib.awtextra.AbsoluteConstraints(601, 472, 95, 39));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Ingrese el ID de la Venta a Modificar");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel1.add(txtIdVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 110, -1));
+
+        txtIdProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdProductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 110, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Re ingrese el ID del Producto");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jPanel1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 110, -1));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Re ingrese el ID del Cliente");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        jPanel1.add(txtIdServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 110, -1));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Re ingrese el ID del Servicio");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Re ingrese la Cantidad");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, -1, -1));
+        jPanel1.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 90, -1));
+
+        jLabel6.setText("jLabel1");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, -1));
+
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 90, -1));
+
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, -1, -1));
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Re ingrese la Fecha");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, -1));
+
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 90, -1));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Re ingrese el Total");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
 
         jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
         jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 740, 530));
@@ -110,6 +201,76 @@ public class ModificarventasView extends javax.swing.JFrame {
     private void regreso2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regreso2MouseClicked
         dispose();
     }//GEN-LAST:event_regreso2MouseClicked
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        try {
+        // Verifica si los campos están vacios
+        if (txtIdVenta.getText().isEmpty() || txtIdProducto.getText().isEmpty() ||
+            txtIdCliente.getText().isEmpty() || txtIdServicio.getText().isEmpty() ||
+            txtCantidad.getText().isEmpty() || txtTotal.getText().isEmpty() ||
+            txtFecha.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Debe ingresar todos los datos para poder modificar la venta");
+        } else {
+            // Crea una nueva instancia de Ventas y establece sus atributos
+            Ventas venta = new Ventas();
+            try {
+                venta.setIdVenta(Integer.parseInt(txtIdVenta.getText())); 
+                venta.setIdProducto(Integer.parseInt(txtIdProducto.getText())); 
+                venta.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
+                venta.setIdServicio(Integer.parseInt(txtIdServicio.getText())); 
+                venta.setCantidad(Integer.parseInt(txtCantidad.getText())); 
+                venta.setTotal(Double.parseDouble(txtTotal.getText())); 
+                
+                // Conversion de fecha del formato YYYY-MM-DD a LocalDate
+                LocalDate fecha = LocalDate.parse(txtFecha.getText());
+                venta.setFecha(fecha);
+
+                // Llama al metodo para modificar la venta y muestra un mensaje 
+                String mensaje = ventasBO.modificarVentas(venta);
+                JOptionPane.showMessageDialog(null, mensaje);
+
+                // Limpia los campos después de la modificación
+                txtIdVenta.setText("");
+                txtIdProducto.setText("");
+                txtIdCliente.setText("");
+                txtIdServicio.setText("");
+                txtCantidad.setText("");
+                txtTotal.setText("");
+                txtFecha.setText("");
+                
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El ID de venta, ID de producto, ID de cliente, ID de servicio, cantidad y total deben ser números válidos");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Fecha inválida. Asegúrate de usar el formato YYYY-MM-DD.");
+            }
+        }
+    } catch (Exception e) {
+        // Manejo genérico de excepciones
+        JOptionPane.showMessageDialog(null, "Ocurrió un error al modificar la venta: " + e.getMessage());
+        Logger.getLogger(ModificarventasView.class.getName()).log(Level.SEVERE, null, e);
+    }
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void txtIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdProductoActionPerformed
+
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaActionPerformed
+
+    private void jButtonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerDatosActionPerformed
+        try {
+            Listarventas();
+        } catch (SQLException ex) {
+            Logger.getLogger(ModificarventasView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonVerDatosActionPerformed
     
     /**
      * @param args the command line arguments
@@ -659,7 +820,16 @@ public class ModificarventasView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonModificar;
+    private javax.swing.JButton jButtonVerDatos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -667,5 +837,12 @@ public class ModificarventasView extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JButton regreso2;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtIdProducto;
+    private javax.swing.JTextField txtIdServicio;
+    private javax.swing.JTextField txtIdVenta;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
