@@ -42,10 +42,12 @@ public class ListarcategoriaView extends javax.swing.JFrame {
         categoriasTabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         Titulo = new javax.swing.JLabel();
+        jLabelBG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(67, 67, 2));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         regreso.setForeground(new java.awt.Color(153, 104, 34));
         regreso.setText("Regresar");
@@ -59,6 +61,7 @@ public class ListarcategoriaView extends javax.swing.JFrame {
                 regresoActionPerformed(evt);
             }
         });
+        jPanel1.add(regreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(632, 447, 95, 39));
 
         categoriasTabla.setBackground(new java.awt.Color(255, 255, 255));
         categoriasTabla.setForeground(new java.awt.Color(153, 104, 34));
@@ -75,6 +78,8 @@ public class ListarcategoriaView extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(categoriasTabla);
 
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 115, 721, 326));
+
         jButton1.setForeground(new java.awt.Color(153, 104, 34));
         jButton1.setText("Ver datos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,41 +87,15 @@ public class ListarcategoriaView extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 75, -1, -1));
 
         Titulo.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 581, 47));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(632, 632, 632)
-                            .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(regreso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
+        jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
+        jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 740, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,6 +170,7 @@ public class ListarcategoriaView extends javax.swing.JFrame {
     private javax.swing.JLabel Titulo;
     private javax.swing.JTable categoriasTabla;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton regreso;

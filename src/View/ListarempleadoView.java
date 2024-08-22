@@ -4,87 +4,23 @@
  */
 package View;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import BO.EmpleadosBO;
+import BO.EmpleadosBO;
+import Entity.Empleados;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import proyectolenguajes.ConexionBD;
+import java.sql.SQLException;
 
-/**
- *
- * @author barah
- */
+
 public class ListarempleadoView extends javax.swing.JFrame {
 
+   EmpleadosBO empleado = new EmpleadosBO();
+   
     public ListarempleadoView() {
         initComponents();
-        // Asocia el ActionListener al botón
-        Mostrar_el_empleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mostrar_el_empleadoActionPerformed(evt);
-            }
-        });
+  
     }
-
-    private void Mostrar_el_empleadoActionPerformed(java.awt.event.ActionEvent evt) {
-    ConexionBD conexionBD = new ConexionBD();
-    Connection conn = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-    try {
-        conn = conexionBD.conectar();
-        if (conn != null) {
-            String query = "SELECT ID_EMPLEADO, ID_OCUPACION, NOMBRE_EMPLEADO, APELLIDO, TELEFONO, SALARIO FROM EMPLEADOS";
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(query);
-
-            // Crear un modelo de tabla y asignarlo a la JTable
-            javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(
-                new Object [][] {},
-                new String [] {"ID", "OCUPACION", "NOMBRE", "APELLIDO", "CELULAR", "SALARIO"}
-            );
-
-            // Añadir filas al modelo de tabla
-            while (rs.next()) {
-                int id = rs.getInt("ID_EMPLEADO");
-                int ocupacion = rs.getInt("ID_OCUPACION");
-                String nombre = rs.getString("NOMBRE_EMPLEADO");
-                String apellido = rs.getString("APELLIDO");
-                String telefono = rs.getString("TELEFONO");
-                double salario = rs.getDouble("SALARIO");
-
-                model.addRow(new Object[]{id, ocupacion, nombre, apellido, telefono, salario});
-            }
-
-            // Asignar el modelo a la tabla
-            TablaMostrarEmpleados.setModel(model);
-        } else {
-            JOptionPane.showMessageDialog(this, "Conexión fallida", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error de SQL: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    } finally {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (stmt != null) {
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        conexionBD.cerrarConexion(conn);
-    }
-}
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,20 +33,23 @@ public class ListarempleadoView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaMostrarEmpleados = new javax.swing.JTable();
-        Mostrar_el_empleado = new javax.swing.JButton();
+        tabEmpleados = new javax.swing.JTable();
         regreso3 = new javax.swing.JButton();
-        Limpiar_datos = new javax.swing.JButton();
+        jButtonVerDatos = new javax.swing.JButton();
+        jLabelBG = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(67, 67, 2));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Titulo.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 6, 581, 47));
 
-        TablaMostrarEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+        tabEmpleados.setBackground(new java.awt.Color(255, 255, 255));
+        tabEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -147,9 +86,9 @@ public class ListarempleadoView extends javax.swing.JFrame {
                 "ID", "OCUPACION", "NOMBRE", "APELLIDO", "CELULAR", "SALARIO"
             }
         ));
-        jScrollPane1.setViewportView(TablaMostrarEmpleados);
+        jScrollPane1.setViewportView(tabEmpleados);
 
-        Mostrar_el_empleado.setText("Mostar datos");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 83, 986, 450));
 
         regreso3.setText("Regresar");
         regreso3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,50 +96,18 @@ public class ListarempleadoView extends javax.swing.JFrame {
                 regreso3MouseClicked(evt);
             }
         });
+        jPanel1.add(regreso3, new org.netbeans.lib.awtextra.AbsoluteConstraints(899, 574, 143, 39));
 
-        Limpiar_datos.setText("LIMPIAR DATOS");
-        Limpiar_datos.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVerDatos.setText("VER DATOS");
+        jButtonVerDatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Limpiar_datosActionPerformed(evt);
+                jButtonVerDatosActionPerformed(evt);
             }
         });
+        jPanel1.add(jButtonVerDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 110, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 56, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(Mostrar_el_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addComponent(Limpiar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46)))
-                        .addComponent(regreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(regreso3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Limpiar_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Mostrar_el_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
-        );
+        jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
+        jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 660));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,11 +127,17 @@ public class ListarempleadoView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_regreso3MouseClicked
 
-    private void Limpiar_datosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Limpiar_datosActionPerformed
-      javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TablaMostrarEmpleados.getModel();
-      model.setRowCount(0);
-    }//GEN-LAST:event_Limpiar_datosActionPerformed
+    private void jButtonVerDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerDatosActionPerformed
+       try {
+            listarEmpleados();
+        } catch (SQLException ex) {
+            Logger.getLogger(ListarempleadoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonVerDatosActionPerformed
 
+    public void listarEmpleados()throws SQLException{
+        empleado.listarEmpleados(tabEmpleados);
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -265,12 +178,12 @@ public class ListarempleadoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Limpiar_datos;
-    private javax.swing.JButton Mostrar_el_empleado;
-    private javax.swing.JTable TablaMostrarEmpleados;
     private javax.swing.JLabel Titulo;
+    private javax.swing.JButton jButtonVerDatos;
+    private javax.swing.JLabel jLabelBG;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton regreso3;
+    private javax.swing.JTable tabEmpleados;
     // End of variables declaration//GEN-END:variables
 }

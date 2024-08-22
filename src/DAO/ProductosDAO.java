@@ -1,43 +1,45 @@
 
 package DAO;
 
-//Entidad
+// Entidad
 import Entity.Productos;
-//Procedimientos Almacenados
+// Procedimientos Almacenados
 import java.sql.CallableStatement;
-//Conexion
+// Conexión
 import java.sql.Connection;
-//Excepcion
+// Excepción
 import java.sql.SQLException;
-//Entrada/Salida de datos interfaz
+// Entrada/Salida de datos interfaz
 import javax.swing.JOptionPane;
-//Tablas
+// Tablas
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-//Resultados SQL
+// Resultados SQL
 import java.sql.ResultSet;
-//Tipo SQL
+// Tipo SQL
 import java.sql.Types;
 
 public class ProductosDAO {
     private String respuesta;
 
-    /* --------- METODO PARA CREAR PRODUCTO ---------- */
+    /* --------- MÉTODO PARA CREAR PRODUCTO ---------- */
     public String crearProducto(Connection conn, Productos productos) {
         CallableStatement cst = null;
 
-        String procedureCall = "{call sp_insertar_producto(?, ?, ?, ?, ?)}";
+        String procedureCall = "{call sp_insertar_producto(?, ?, ?, ?, ?, ?)}"; // 6 parámetros
 
-        try {
-            cst = conn.prepareCall(procedureCall);
+    try {
+        cst = conn.prepareCall(procedureCall);
 
-            cst.setString(1, productos.getNombreProducto());
-            cst.setInt(2, productos.getCantidadInventario());
-            cst.setInt(3, productos.getIdCategoria());
-            cst.setInt(4, productos.getIdProveedor());
-            cst.setInt(5, productos.getInventario());
+        // Ajusta los parámetros de acuerdo con el procedimiento almacenado
+        cst.setInt(1, productos.getIdCategoria()); // id_categoria
+        cst.setInt(2, productos.getIdProveedor()); // id_proveedor
+        cst.setString(3, productos.getNombreProducto()); // nombre_producto
+        cst.setInt(4, productos.getInventario()); // inventario
+        cst.setDouble(5, productos.getPrecioVenta()); // precio_venta
+        cst.setDouble(6, productos.getPrecioCompra()); // precio_compra
 
-            respuesta = "Producto creado correctamente";
+        respuesta = "Producto creado correctamente";
             cst.execute();
             cst.close();
         } catch (SQLException err) {
@@ -54,25 +56,30 @@ public class ProductosDAO {
         return respuesta;
     }
 
-    /* --------- METODO PARA MODIFICAR PRODUCTO ---------- */
+    /* --------- MÉTODO PARA MODIFICAR PRODUCTO ---------- */
     public String modificarProducto(Connection conn, Productos productos) {
         CallableStatement cst = null;
+        String respuesta = "";
 
-        String procedureCall = "{call sp_actualizar_producto(?, ?, ?, ?, ?, ?)}";
+        // Corregido para coincidir con la firma del procedimiento almacenado
+        String procedureCall = "{call sp_actualizar_producto(?, ?, ?, ?, ?, ?, ?)}";
 
         try {
             cst = conn.prepareCall(procedureCall);
 
-            cst.setInt(1, productos.getIdProducto());
-            cst.setString(2, productos.getNombreProducto());
-            cst.setInt(3, productos.getCantidadInventario());
-            cst.setInt(4, productos.getIdCategoria());
-            cst.setInt(5, productos.getIdProveedor());
-            cst.setInt(6, productos.getInventario());
+            // Asignar parámetros del procedimiento almacenado
+            cst.setInt(1, productos.getIdProducto()); // Parámetro para ID del producto
+            cst.setInt(2, productos.getIdCategoria());
+            cst.setInt(3, productos.getIdProveedor());
+            cst.setString(4, productos.getNombreProducto());
+            cst.setInt(5, productos.getInventario());
+            cst.setDouble(6, productos.getPrecioVenta());
+            cst.setDouble(7, productos.getPrecioCompra());
 
-            respuesta = "Producto modificado correctamente";
+            // Ejecutar el procedimiento
             cst.execute();
-            cst.close();
+            respuesta = "Producto modificado correctamente";
+
         } catch (SQLException err) {
             respuesta = "No se pudo modificar el producto\nError: " + err.getMessage();
         } finally {
@@ -80,14 +87,14 @@ public class ProductosDAO {
                 try {
                     cst.close();
                 } catch (SQLException e) {
-                    respuesta = respuesta + "\nError al cerrar el CallableStatement\n" + e.getMessage();
+                    respuesta += "\nError al cerrar el CallableStatement\n" + e.getMessage();
                 }
             }
         }
         return respuesta;
     }
 
-    /* --------- METODO PARA ELIMINAR PRODUCTO ---------- */
+   /* --------- MÉTODO PARA ELIMINAR PRODUCTO ---------- */
     public String eliminarProducto(Connection conn, int idProducto) {
         CallableStatement cst = null;
 
@@ -114,33 +121,38 @@ public class ProductosDAO {
         return respuesta;
     }
 
-    /* --------- METODO PARA LISTAR PRODUCTOS ---------- */
+    /* --------- MÉTODO PARA LISTAR PRODUCTOS ---------- */
     public void listarProductos(Connection conn, JTable tabla) {
         DefaultTableModel model;
-        String[] columnas = {"ID Producto", "Nombre", "Cantidad Inventario", "ID Categoría", "ID Proveedor", "Inventario"};
+        String[] columnas = {"ID Producto", "Nombre Producto", "Inventario", "ID Categoría", "ID Proveedor", "Precio Venta", "Precio Compra"};
         model = new DefaultTableModel(null, columnas);
 
         CallableStatement cst = null;
         ResultSet rs = null;
 
         try {
+            // Llama al procedimiento almacenado
             cst = conn.prepareCall("{call sp_listar_productos(?)}");
             cst.registerOutParameter(1, Types.REF_CURSOR);
             cst.execute();
 
+            // Obtiene el cursor
             rs = (ResultSet) cst.getObject(1);
 
+            // Itera a través del ResultSet y llena el modelo de tabla
             while (rs.next()) {
                 int idProducto = rs.getInt("ID_PRODUCTO");
                 String nombreProducto = rs.getString("NOMBRE_PRODUCTO");
-                int cantidadInventario = rs.getInt("CANTIDAD_INVENTARIO");
+                int inventario = rs.getInt("INVENTARIO");
                 int idCategoria = rs.getInt("ID_CATEGORIA");
                 int idProveedor = rs.getInt("ID_PROVEEDOR");
-                int inventario = rs.getInt("INVENTARIO");
+                double precioVenta = rs.getDouble("PRECIO_VENTA");
+                double precioCompra = rs.getDouble("PRECIO_COMPRA");
 
-                model.addRow(new Object[]{idProducto, nombreProducto, cantidadInventario, idCategoria, idProveedor, inventario});
+                model.addRow(new Object[]{idProducto, nombreProducto, inventario, idCategoria, idProveedor, precioVenta, precioCompra});
             }
 
+            // Establece el modelo en la tabla
             tabla.setModel(model);
 
         } catch (SQLException e) {

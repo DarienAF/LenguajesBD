@@ -10,7 +10,7 @@ public class ProyectoLenguajes {
 
     public static void main(String[] args) {
          // Crea una instancia de ConexionBD
-    /*    ConexionBD conexionBD = new ConexionBD();
+    ConexionBD conexionBD = new ConexionBD();
         Connection conexion = null;
 
         try {
@@ -30,7 +30,7 @@ public class ProyectoLenguajes {
 
         
         // TODO code application logic here*/
-      Ejecutar(); //Se empieza con la funcion/metodo para que surja la interfaz
+     Ejecutar(); //Se empieza con la funcion/metodo para que surja la interfaz
         
     }
     //Metodo para ejecutar el JFrame desde la Main

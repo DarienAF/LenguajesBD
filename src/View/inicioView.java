@@ -32,6 +32,8 @@ public class inicioView extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cerrar = new javax.swing.JButton();
+        jLabelLogo = new javax.swing.JLabel();
+        jLabelBG = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         CategoriasMenu = new javax.swing.JMenu();
         CrearCategoria = new javax.swing.JMenuItem();
@@ -82,14 +84,17 @@ public class inicioView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(67, 67, 2));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Titulo.setFont(new java.awt.Font("Goudy Stout", 0, 48)); // NOI18N
         Titulo.setForeground(new java.awt.Color(153, 104, 34));
         Titulo.setText("UNDER FIRE");
+        jPanel1.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Goudy Stout", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 104, 34));
         jLabel1.setText("Paintball");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, -1));
 
         cerrar.setBackground(new java.awt.Color(153, 104, 34));
         cerrar.setText("Cerrar");
@@ -98,36 +103,14 @@ public class inicioView extends javax.swing.JFrame {
                 cerrarMouseClicked(evt);
             }
         });
+        jPanel1.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(636, 565, 82, 35));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(282, 282, 282)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(103, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Titulo)
-                        .addGap(91, 91, 91))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(218, 218, 218)
-                .addComponent(Titulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
-                .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-        );
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logo.jpg"))); // NOI18N
+        jLabelLogo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(jLabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 310, 280));
+
+        jLabelBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/background.png"))); // NOI18N
+        jPanel1.add(jLabelBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 750, 600));
 
         jMenuBar1.setBackground(new java.awt.Color(153, 104, 34));
 
@@ -941,6 +924,8 @@ public class inicioView extends javax.swing.JFrame {
     private javax.swing.JMenu VentasMenu;
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelBG;
+    private javax.swing.JLabel jLabelLogo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem modificarEmp;
