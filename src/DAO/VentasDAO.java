@@ -33,14 +33,13 @@ public class VentasDAO {
         try {
             cst = conn.prepareCall(procedureCall);
 
-            // Configura los parámetros del procedimiento almacenado
+            // Configura los parqmetros del procedimiento almacenado
             cst.setInt(1, venta.getIdProducto());
-            cst.setInt(2, venta.getIdCliente()); 
-            cst.setInt(3, venta.getIdServicio()); 
-            cst.setInt(4, venta.getCantidad());   
-            cst.setDouble(5, venta.getTotal());   
-            cst.setDate(6, java.sql.Date.valueOf(venta.getFecha())); // Convierte LocalDate a SQL Date
-
+            cst.setDouble(2, venta.getTotal());
+            cst.setInt(3, venta.getIdCliente());
+            cst.setInt(4, venta.getIdServicio());
+            cst.setInt(5, venta.getCantidad());
+            cst.setDate(6, java.sql.Date.valueOf(venta.getFecha()));
             respuesta = "Venta registrada correctamente";
             cst.execute();
             cst.close();
@@ -65,17 +64,18 @@ public class VentasDAO {
         String procedureCall = "{call sp_actualizar_venta(?, ?, ?, ?, ?, ?, ?)}"; 
 
         try {
-            cst = conn.prepareCall(procedureCall);
+            
+        cst = conn.prepareCall(procedureCall);
 
-            // Configura los parámetros del procedimiento almacenado
-            cst.setInt(1, venta.getIdVenta());
-            cst.setInt(2, venta.getIdProducto());
-            cst.setInt(3, venta.getIdCliente()); 
-            cst.setInt(4, venta.getIdServicio()); 
-            cst.setInt(5, venta.getCantidad());   
-            cst.setDouble(6, venta.getTotal());   
-            cst.setDate(7, java.sql.Date.valueOf(venta.getFecha())); 
-
+        // Configura los parámetros del procedimiento almacenado
+        cst.setInt(1, venta.getIdVenta());
+        cst.setInt(2, venta.getIdProducto());
+        cst.setDouble(3, venta.getTotal()); // Asegúrate de que este es el parámetro correcto
+        cst.setInt(4, venta.getIdCliente());
+        cst.setInt(5, venta.getIdServicio());
+        cst.setInt(6, venta.getCantidad());
+        cst.setDate(7, java.sql.Date.valueOf(venta.getFecha())); 
+        
             respuesta = "Venta modificada correctamente";
             cst.execute();
             cst.close();

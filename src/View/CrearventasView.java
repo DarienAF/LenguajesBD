@@ -170,12 +170,12 @@ public class CrearventasView extends javax.swing.JFrame {
     private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
         try {
         // Verifica que todos los campos estén llenos
-        if (txtIdProducto.getText().isEmpty() || txtIdProducto.getText().isEmpty() ||
-            txtIdCliente.getText().isEmpty() || txtCantidad.getText().isEmpty() ||
+        if (txtIdProducto.getText().isEmpty() || txtIdCliente.getText().isEmpty() ||
+            txtIdServicio.getText().isEmpty() || txtCantidad.getText().isEmpty() ||
             txtTotal.getText().isEmpty() || txtFecha.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(null, "Todos los campos deben ser llenos");
-            
+
         } else {
             // Convierte la fecha ingresada en formato YYYY-MM-DD a LocalDate
             LocalDate fecha = null;
@@ -185,24 +185,24 @@ public class CrearventasView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fecha invalida. Debe usar el formato YYYY-MM-DD");
                 return;
             }
-            
+
             // Crea una nueva instancia de Ventas y establece sus atributos
             Ventas venta = new Ventas();
             venta.setIdProducto(Integer.parseInt(txtIdProducto.getText()));
-            venta.setIdCliente(Integer.parseInt(txtIdProducto.getText()));
-            venta.setIdServicio(Integer.parseInt(txtIdCliente.getText()));
+            venta.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
+            venta.setIdServicio(Integer.parseInt(txtIdServicio.getText())); // Asegúrate de tener el campo correcto para idServicio
             venta.setCantidad(Integer.parseInt(txtCantidad.getText()));
-            venta.setTotal(Double.parseDouble(txtTotal.getText())); // Asegúrate de que sea double
-            venta.setFecha(fecha); // Establece la fecha
-            
+            venta.setTotal(Double.parseDouble(txtTotal.getText()));
+            venta.setFecha(fecha);
+
             // Llama al método de lógica de negocio para crear la venta
             String mensaje = ventasBO.crearVentas(venta);
             JOptionPane.showMessageDialog(null, mensaje);
-            
+
             // Limpia los campos después de la creación
             txtIdProducto.setText("");
-            txtIdProducto.setText("");
             txtIdCliente.setText("");
+            txtIdServicio.setText(""); // Limpia también txtIdServicio si es aplicable
             txtCantidad.setText("");
             txtTotal.setText("");
             txtFecha.setText(""); // Limpia el campo de fecha
